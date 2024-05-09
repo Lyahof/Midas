@@ -1,21 +1,19 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledLogo = styled.div`
-  & img {
-    @media (max-width: 37em) {
-      width: 80%;
-    }
+const StyledLink = styled(Link)`
+  display: block;
+  width: 17rem;
+  @media (max-width: 37em) {
+    width: 9rem;
   }
 `;
 
 function Logo() {
   return (
-    <Link to="/">
-      <StyledLogo>
-        <img src="/logo.svg" alt="logo" />
-      </StyledLogo>
-    </Link>
+    <StyledLink to="/">
+      <img src="/logo.svg" alt="logo" />
+    </StyledLink>
   );
 }
 

@@ -6,10 +6,12 @@ import { IoIosArrowUp } from "react-icons/io";
 
 const NavList = styled.ul`
   display: flex;
-  gap: 3.5rem;
+  gap: 5rem;
+  line-height: 2.4;
 
   @media (max-width: 86em) {
     gap: 2.5rem;
+    margin-right: 7rem;
   }
 
   @media (max-width: 64em) {
@@ -48,14 +50,15 @@ const StyledNavLink = styled(NavLink)`
 
 const DropDownHeader = styled.div`
   position: relative;
-  margin-bottom: -3.2rem;
   font-size: 1.4rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   & span {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: all 0.3s ease;
 
     &:hover {
       color: var(--yellow-color);
@@ -69,11 +72,14 @@ const DropDownHeader = styled.div`
 
 const DropDownListContainer = styled.div`
   position: absolute;
-  top: 3rem;
   left: 0;
-  width: 22rem;
-  background-color: black;
+  width: 25rem;
+  background-color: rgba(15, 15, 17, 0.92);
   z-index: 999;
+
+  @media (max-width: 86em) {
+    width: 19rem;
+  }
 `;
 
 const DropDownList = styled.ul`
@@ -82,10 +88,19 @@ const DropDownList = styled.ul`
   gap: 2.3rem;
   padding: 2rem 0 2rem 2rem;
   text-transform: uppercase;
+  line-height: 1.2;
 `;
 
 function MainNav() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenHot, setIsOpenHot] = useState(false);
+  const [isOpenCold, setIsOpenCold] = useState(false);
+
+  /*   const handleNavLinkClick = (e) => {
+    if (e.target.tagName === "A") {
+      setIsOpenHot(false);
+      setIsOpenCold(false);
+    }
+  }; */
 
   return (
     <nav>
@@ -96,27 +111,45 @@ function MainNav() {
             <img src="/logo-fier.svg" alt="f" />
           </StyledNavLink>
         </li>
-        <li>
-          <DropDownHeader onClick={() => setIsOpen((isOpen) => !isOpen)}>
-            <div>
-              <span>
-                ГОРЯЧЕЕ {!isOpen ? <IoIosArrowDown /> : <IoIosArrowUp />}
-              </span>
-            </div>
-            {isOpen && (
-              <DropDownListContainer>
-                <DropDownList>
-                  <StyledNavLink to="hot">Горячие блюда</StyledNavLink>
-                  <StyledNavLink to="soups">Супы</StyledNavLink>
-                  <StyledNavLink to="hinkali">Хинкали</StyledNavLink>
-                </DropDownList>
-              </DropDownListContainer>
-            )}
-          </DropDownHeader>
-        </li>
-        <li>
-          <StyledNavLink to="/cold">ХОЛОДНОЕ</StyledNavLink>
-        </li>
+
+        <DropDownHeader
+          onMouseOver={() => setIsOpenHot(true)}
+          onMouseOut={() => setIsOpenHot(false)}
+        >
+          <span>
+            ГОРЯЧЕЕ {!isOpenHot ? <IoIosArrowDown /> : <IoIosArrowUp />}
+          </span>
+
+          {isOpenHot && (
+            <DropDownListContainer>
+              <DropDownList /* onClick={handleNavLinkClick} */>
+                <StyledNavLink to="hot">Горячие блюда</StyledNavLink>
+                <StyledNavLink to="soups">Супы</StyledNavLink>
+                <StyledNavLink to="hinkali">Хинкали</StyledNavLink>
+              </DropDownList>
+            </DropDownListContainer>
+          )}
+        </DropDownHeader>
+
+        <DropDownHeader
+          onMouseOver={() => setIsOpenCold(true)}
+          onMouseOut={() => setIsOpenCold(false)}
+        >
+          <span>
+            ХОЛОДНОЕ {!isOpenCold ? <IoIosArrowDown /> : <IoIosArrowUp />}
+          </span>
+
+          {isOpenCold && (
+            <DropDownListContainer>
+              <DropDownList /* onClick={handleNavLinkClick} */>
+                <StyledNavLink to="cold">Холоднык закуски</StyledNavLink>
+                <StyledNavLink to="salads">Салаты</StyledNavLink>
+                <StyledNavLink to="sauces">Соусы</StyledNavLink>
+              </DropDownList>
+            </DropDownListContainer>
+          )}
+        </DropDownHeader>
+
         <li>
           <StyledNavLink to="/bakery">ВЫПЕЧКА</StyledNavLink>
         </li>

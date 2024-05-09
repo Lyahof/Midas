@@ -1,18 +1,18 @@
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const StyledHeaderInput = styled.input`
-  display: block;
-  padding: 1.8rem 0 1.8rem 1rem;
+  padding: 1.7rem 0 1.7rem 1rem;
   border: none;
   color: #333;
-  max-width: 22rem;
+  max-width: 18rem;
   position: absolute;
   height: 100%;
-  top: -2rem;
+  top: -1.7rem;
   right: -1rem;
 
   @media (max-width: 86em) {
-    width: 12rem;
+    width: 15rem;
   }
 
   &:focus {
@@ -24,8 +24,25 @@ const StyledHeaderInput = styled.input`
   }
 `;
 
-function HeaderInput() {
-  return <StyledHeaderInput placeholder="Поиск" type="text" />;
+function HeaderInput({ setIsInput }) {
+  const ref = useRef();
+
+  useEffect(
+    function () {
+      function handleClick(e) {
+        console.log(ref.current);
+        if (ref.current && !ref.current.contains(e.target)) {
+          setIsInput(false);
+        }
+      }
+      document.addEventListener("click", handleClick, true);
+
+      return () => document.removeEventListener("click", handleClick, true);
+    },
+    [setIsInput]
+  );
+
+  return <StyledHeaderInput placeholder="Поиск" type="text" ref={ref} />;
 }
 
 export default HeaderInput;

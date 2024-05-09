@@ -5,6 +5,8 @@ const StyledPriceBlock = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+  margin-top: auto;
+  padding-left: 5px;
 `;
 
 const StyledBasket = styled.button`
@@ -22,6 +24,9 @@ const StyledBasket = styled.button`
 const Price = styled.p`
   font-size: 2.3rem;
   font-weight: 800;
+  @media (max-width: 48em) {
+    font-size: 1.7rem;
+  }
 `;
 
 function PriceBlock({ children }) {

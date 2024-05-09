@@ -10,11 +10,16 @@ const variations = {
 };
 
 const MealWeight = styled.div`
-  max-width: 5rem;
+  max-width: 5.5rem;
   font-size: 1.3rem;
   border-radius: 4px;
-  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  padding: 0.5rem;
   ${(props) => variations[props.variation]}
+  @media (max-width: 48em) {
+    font-size: 1.2rem;
+    padding: 2px;
+    max-width: 45px;
+  }
 `;
 
 MealWeight.defaultProps = {

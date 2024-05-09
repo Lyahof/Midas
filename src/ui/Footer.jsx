@@ -27,6 +27,10 @@ const Contacts = styled.div`
     grid-template-columns: 1fr;
     row-gap: 3rem;
   }
+
+  @media (max-width: 37em) {
+    padding-top: 3rem;
+  }
 `;
 
 const StyledFooterList = styled.ul`

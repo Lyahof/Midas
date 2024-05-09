@@ -1,13 +1,17 @@
 import { createGlobalStyle } from "styled-components";
 
 /*@media query - sizes:
+	@media (max-width: 97em) - 1552px
 	@media (max-width: 86em) - 1376px
 	@media (max-width: 64em) - 1024px
 	@media (max-width: 55em) - 880px
+	@media (max-width: 48em) - 768px
 	@media (max-width: 44em) - 704px
 	@media (max-width: 37em) - 585px
 	@media (max-width: 34em) - 544px
 	@media (max-width: 31em) - 496px
+	@media (max-width: 30em) - 480px - only for slider adoptation
+	@media (max-width: 28em) - 448px - only for slider adoptation
 */
 
 const GlobalStyles = createGlobalStyle`
@@ -76,16 +80,14 @@ button {
 
 select:disabled,
 input:disabled {
-  //background-color: var(--color-grey-200);
-  //color: var(--color-grey-500);
+
 }
 
 input:focus,
 button:focus,
 textarea:focus,
 select:focus {
-  //outline: 2px solid var(--color-brand-600);
-  //outline-offset: -1px;
+
 }
 
 /* Parent selector, finally 😃 */
@@ -117,6 +119,65 @@ h6 {
 img {
   max-width: 100%;
 	}
+
+
+/*Slider styles */
+
+.slick-disabled {
+	opacity: 30%;
+}
+
+.slick-arrow {
+	border: 1px solid #fff;
+	border-radius: 50%;
+	width: 5.5rem;
+	height: 5.5rem;
+	@media (max-width: 48em){
+		width: 4rem;
+		height: 4rem;
+	}
+}
+
+.slick-arrow:before {
+	display: block;
+	font-size: 3.5rem;
+	padding-bottom: 7px;
+	font-family: inherit;
+	@media (max-width: 48em){
+		font-size: 2.2rem;
+		padding-bottom: 2px;
+	}
+}
+
+.slick-next {
+	right: 5rem;
+	top: -8rem;
+	@media (max-width: 48em){
+		top: -7rem;
+	}
+	@media (max-width: 28em) {
+		top: -6rem;
+	}
+}
+
+.slick-prev {
+	left: 130rem;
+	top: -8rem;
+	@media (max-width: 64em) {
+		left: 75rem;
+	}
+	@media (max-width: 48em){
+		top: -7rem;
+		left: 53rem;
+	}
+	@media (max-width: 28em) {
+		top: -6rem;
+		left: 22rem;
+	}
+	@media (max-width: 25em) {
+		left: 18.5rem;
+	}
+}
 `
 
 export default GlobalStyles;

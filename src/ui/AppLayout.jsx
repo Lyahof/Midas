@@ -7,6 +7,7 @@ import styled from "styled-components";
 import TabletNav from "./TabletNav";
 import MobileNav from "./MobileNav";
 import { useMobBtnContent } from "../contexts/MobBtnContext";
+import MobileHeader from "./MobileHeader";
 
 const Container = styled.div`
   max-width: 154rem;
@@ -28,7 +29,8 @@ function AppLayout() {
   return (
     <>
       <Container>
-        <Header />
+        {isMobileDevice ? <MobileHeader /> : <Header />}
+
         <Main>
           {isOpenMenu && isTabletDevice && <TabletNav />}
           {isOpenMenu && isMobileDevice && <MobileNav />}

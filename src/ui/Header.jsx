@@ -6,10 +6,9 @@ import MobileButton from "./MobileButton";
 
 const StyledHeader = styled.header`
   display: flex;
-  gap: 20rem;
+  justify-content: space-between;
   align-items: center;
   margin: 4rem 0 3rem 0;
-  padding-right: 2rem;
 
   @media (max-width: 86em) {
     gap: 3rem;

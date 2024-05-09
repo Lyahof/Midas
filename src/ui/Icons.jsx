@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { useMediaQuery } from "@uidotdev/usehooks";
 import { GrBasket } from "react-icons/gr";
+import { LuPhoneOutgoing } from "react-icons/lu";
 import { PiMagnifyingGlass } from "react-icons/pi";
-import { LiaUserSolid } from "react-icons/lia";
+import { RiUserLine } from "react-icons/ri";
 import HeaderInput from "./HeaderInput";
 
 const StyledIcons = styled.div`
-  margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 4rem;
 
   @media (max-width: 86em) {
-    gap: 2rem;
+    gap: 3rem;
   }
 `;
 
@@ -48,22 +49,47 @@ const ToggleInput = styled.div`
     //&.active:visited svg {
     color: #fbd13e;
   }
-  @media (max-width: 37em) {
-    display: none;
+`;
+
+const PhoneLink = styled.a`
+  & svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    transition: all 0.3s;
   }
+`;
+
+const PiMagnifyingGlassCont = styled.div`
+  position: absolute;
+  left: -2rem;
+  top: 50%;
+  transform: translateY(-50%);
 `;
 
 function Icons() {
   const [isInput, setIsInput] = useState(false);
+  const isMobileDevice = useMediaQuery("only screen and (max-width : 37em)");
 
   return (
     <StyledIcons>
-      <ToggleInput onClick={() => setIsInput(true)}>
-        {!isInput ? <PiMagnifyingGlass /> : <HeaderInput />}
-      </ToggleInput>
+      {isMobileDevice ? (
+        <PhoneLink href="tel:+74998416729">
+          <LuPhoneOutgoing />
+        </PhoneLink>
+      ) : (
+        <ToggleInput onClick={() => setIsInput(true)}>
+          {!isInput ? (
+            <PiMagnifyingGlassCont>
+              <PiMagnifyingGlass />
+            </PiMagnifyingGlassCont>
+          ) : (
+            <HeaderInput setIsInput={setIsInput} />
+          )}
+        </ToggleInput>
+      )}
 
       <StyledNavLink to="login">
-        <LiaUserSolid />
+        <RiUserLine />
       </StyledNavLink>
 
       <StyledNavLink to="cart">

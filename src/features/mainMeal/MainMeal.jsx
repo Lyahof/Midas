@@ -9,14 +9,19 @@ import MainDesert from "./MainDesert";
 
 import { GetMainMeal } from "../../services/APIMainMeal";
 import formatCurrency from "../../helpers/formatCurrency";
+import Spinner from "../../ui/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const Grid = styled.div`
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 3.5fr;
-  gap: 4rem;
+  grid-template-columns: 1fr 3.4fr;
+  gap: 6rem;
+  margin-bottom: 6rem;
 
   @media (max-width: 86em) {
-    grid-template-columns: 1fr 2.2fr;
+    grid-template-columns: 1.1fr 3fr;
+    gap: 4rem;
   }
 
   @media (max-width: 64em) {
@@ -52,17 +57,17 @@ const Card = styled.div`
   background-image: url("/card-background.png");
   background-repeat: no-repeat;
   position: absolute;
-  bottom: -8rem;
-  left: 7rem;
+  bottom: -3rem;
+  left: 47rem;
   z-index: 999;
 
   @media (max-width: 86em) {
-    bottom: 6rem;
-    left: 11rem;
+    bottom: 5rem;
+    left: 47rem;
   }
   @media (max-width: 64em) {
-    bottom: -26rem;
-    left: 4rem;
+    bottom: -7rem;
+    left: 1rem;
   }
 
   @media (max-width: 37em) {
@@ -83,6 +88,7 @@ const CardTitle = styled.h3`
 const Slogan = styled.h3`
   font-size: 2.5rem;
   flex-wrap: wrap;
+
   @media (max-width: 64em) {
     max-width: 28rem;
   }
@@ -109,7 +115,8 @@ const Links = styled.div`
 
 const ImageContainer = styled.div`
   max-width: 117rem;
-  position: relative;
+  overflow: hidden;
+
   @media (max-width: 37em) {
     display: none;
   }
@@ -117,42 +124,61 @@ const ImageContainer = styled.div`
 
 const Img = styled.img`
   width: 100%;
+  cursor: pointer;
+  transition: all 0.5s;
+
+  &:hover {
+    transform: scale(1.015);
+  }
 `;
 
 function MainMeal() {
+  const navigate = useNavigate();
   const { isLoading, data } = useQuery({
     queryKey: ["main-meal"],
     queryFn: GetMainMeal,
   });
 
-  const { image, name, price, weight, description } = data ? data[0] : {};
-  const mainDesert = data ? data[1] : {};
+  if (isLoading) return <Spinner />;
+  const {
+    id,
+    foodName,
+    foodWeight,
+    foodDescription,
+    foodPrice,
+    foodImage,
+    foodCategory,
+  } = data[0];
+
+  const mainDesert = data[1];
 
   return (
-    <Grid>
-      <Info>
-        <Slogan>Доставка готовой еды из фермерских продуктов!</Slogan>
-        <Links>
-          <PhoneLink size="big" href="tel:+7(499)841-67-29">
-            +7 (499) 841-67-29
-          </PhoneLink>
-          <EmailLink size="big" href="delivery@midas.rest">
-            delivery@midas.rest
-          </EmailLink>
-        </Links>
-        <MainDesert mainDesert={mainDesert} />
-      </Info>
+    <>
+      <Grid>
+        <Info>
+          <Slogan>Доставка готовой еды из фермерских продуктов!</Slogan>
+          <Links>
+            <PhoneLink size="big" href="tel:+7(499)841-67-29">
+              +7 (499) 841-67-29
+            </PhoneLink>
+            <EmailLink size="big" href="delivery@midas.rest">
+              delivery@midas.rest
+            </EmailLink>
+          </Links>
+          <MainDesert mainDesert={mainDesert} />
+        </Info>
 
-      <ImageContainer>
-        <Card>
-          <CardTitle>{name}</CardTitle>
-          <MealWeight variation="secondary">{weight}</MealWeight>
-          <CardText>{description}</CardText>
-          <PriceBlock>{formatCurrency(price)}</PriceBlock>
-        </Card>
-        <Img src={image} />
-      </ImageContainer>
-    </Grid>
+        <ImageContainer onClick={() => navigate(`/${foodCategory}/${id}`)}>
+          <Card>
+            <CardTitle>{foodName}</CardTitle>
+            <MealWeight variation="secondary">{foodWeight}</MealWeight>
+            <CardText>{foodDescription}</CardText>
+            <PriceBlock>{formatCurrency(foodPrice)}</PriceBlock>
+          </Card>
+          <Img src={foodImage} />
+        </ImageContainer>
+      </Grid>
+    </>
   );
 }
 
