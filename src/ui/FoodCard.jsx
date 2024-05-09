@@ -31,7 +31,7 @@ const ImageContainer = styled.div`
     object-fit: cover;
     transition: all 0.5s;
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
   }
 `;
