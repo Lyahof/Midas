@@ -147,6 +147,10 @@ img {
 		font-size: 2.2rem;
 		padding-bottom: 2px;
 	}
+
+	@media (max-width: 28em) {
+		padding-bottom: 10px;
+	}
 }
 
 .slick-next {
