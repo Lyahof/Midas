@@ -1,5 +1,12 @@
+import Breadcrumbs from "../ui/Breadcrumbs";
+
 function Contacts() {
-  return <div>Contacts</div>;
+  return (
+    <>
+      <Breadcrumbs />
+      <div>Contacts</div>
+    </>
+  );
 }
 
 export default Contacts;

@@ -11,7 +11,7 @@ import { createGlobalStyle } from "styled-components";
 	@media (max-width: 34em) - 544px
 	@media (max-width: 31em) - 496px
 	@media (max-width: 30em) - 480px - only for slider adoptation
-	@media (max-width: 28em) - 448px - only for slider adoptation
+	@media (max-width: 28em) - 448px
 */
 
 const GlobalStyles = createGlobalStyle`
@@ -149,7 +149,7 @@ img {
 	}
 
 	@media (max-width: 28em) {
-		padding-bottom: 10px;
+		padding-bottom: 8px;
 	}
 }
 

@@ -24,6 +24,8 @@ import Policy from "./pages/Policy";
 import Terms from "./pages/Terms";
 import Salads from "./pages/Salads";
 import Sauces from "./pages/Sauces";
+import FoodPage from "./pages/FoodPage";
+
 import { MobBtnProvider } from "./contexts/MobBtnContext";
 
 const queryClient = new QueryClient();
@@ -39,25 +41,28 @@ function App() {
             <Route element={<AppLayout />}>
               <Route index element={<Navigate to="main" />} />
               <Route path="main" element={<MainPage />} />
-              <Route path="promotions" element={<Promotions />} />
-              <Route path="bakery" element={<Bakery />} />
-              <Route path="salads" element={<Salads />} />
-              <Route path="cold" element={<Cold />} />
-              <Route path="deserts" element={<Deserts />} />
-              <Route path="sauces" element={<Sauces />} />
-              <Route path="drinks" element={<Drinks />} />
-              <Route path="hinkali" element={<Hinkali />} />
-              <Route path="hot" element={<Hot />} />
-              <Route path="soups" element={<Soups />} />
-              <Route path="login" element={<Login />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="placingOrder" element={<PlacingOrder />} />
-              <Route path="feedback" element={<Feedback />} />
-              <Route path="delivery" element={<Delivery />} />
-              <Route path="payment" element={<Payment />} />
-              <Route path="contacts" element={<Contacts />} />
-              <Route path="policy" element={<Policy />} />
-              <Route path="terms" element={<Terms />} />
+              <Route path="main/promotions" element={<Promotions />} />
+              <Route path="main/bakery" element={<Bakery />} />
+              <Route path="main/salads" element={<Salads />} />
+              <Route path="main/cold" element={<Cold />} />
+              <Route path="main/deserts" element={<Deserts />} />
+              <Route path="main/sauces" element={<Sauces />} />
+              <Route path="main/drinks" element={<Drinks />} />
+              <Route path="main/hinkali" element={<Hinkali />} />
+              <Route path="main/soups" element={<Soups />} />
+
+              <Route path="main/hot" element={<Hot />} />
+              <Route path="main/hot/:foodId" element={<FoodPage />} />
+
+              <Route path="main/login" element={<Login />} />
+              <Route path="main/cart" element={<Cart />} />
+              <Route path="main/placingOrder" element={<PlacingOrder />} />
+              <Route path="main/feedback" element={<Feedback />} />
+              <Route path="main/delivery" element={<Delivery />} />
+              <Route path="main/payment" element={<Payment />} />
+              <Route path="main/contacts" element={<Contacts />} />
+              <Route path="main/policy" element={<Policy />} />
+              <Route path="main/terms" element={<Terms />} />
             </Route>
             <Route path="*" element={<PageNotFound />} />
           </Routes>

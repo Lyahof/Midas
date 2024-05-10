@@ -12,6 +12,7 @@ const positions = {
 const Title = styled.h1`
   font-size: 8rem;
   ${(props) => positions[props.align]};
+  line-height: 1;
 
   & span {
     position: relative;

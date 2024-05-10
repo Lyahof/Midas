@@ -1,5 +1,12 @@
+import Breadcrumbs from "../ui/Breadcrumbs";
+
 function Cart() {
-  return <div>Cart</div>;
+  return (
+    <>
+      <Breadcrumbs />
+      <div>Cart</div>
+    </>
+  );
 }
 
 export default Cart;

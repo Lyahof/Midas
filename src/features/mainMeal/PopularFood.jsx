@@ -4,6 +4,7 @@ import Title from "../../ui/Title";
 import FoodCard from "../../ui/FoodCard";
 import Spinner from "../../ui/Spinner";
 import { GetPopularMenu } from "../../services/APIMenu";
+import MenuBlock from "../../ui/MenuBlock";
 
 const StyledPopularFood = styled.div`
   display: flex;
@@ -12,26 +13,6 @@ const StyledPopularFood = styled.div`
   margin-bottom: 12rem;
   @media (max-width: 48em) {
     margin-bottom: 7rem;
-  }
-`;
-
-const PopularFoodItems = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 4rem 2rem;
-
-  @media (max-width: 86em) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (max-width: 64em) {
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-  }
-
-  @media (max-width: 31em) {
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
   }
 `;
 
@@ -50,11 +31,11 @@ function PopularFood() {
         <br />
         <span>блюда</span>
       </Title>
-      <PopularFoodItems>
+      <MenuBlock>
         {popularMenu.map((item) => (
           <FoodCard item={item} key={item.id} />
         ))}
-      </PopularFoodItems>
+      </MenuBlock>
     </StyledPopularFood>
   );
 }

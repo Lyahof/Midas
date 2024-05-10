@@ -1,5 +1,12 @@
+import Breadcrumbs from "../ui/Breadcrumbs";
+
 function Terms() {
-  return <div>Terms</div>;
+  return (
+    <>
+      <Breadcrumbs />
+      <div>Terms</div>
+    </>
+  );
 }
 
 export default Terms;

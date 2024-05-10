@@ -8,7 +8,7 @@ const StyledFoodCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: all 0.3s;
+  transition: all 0.5s;
   border-radius: 2px;
   overflow: hidden;
   cursor: pointer;
@@ -59,6 +59,12 @@ const FoodDescription = styled.p`
   font-size: 1.3rem;
   opacity: 70%;
   line-height: 1.4;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
   @media (max-width: 48em) {
     display: none;
   }
@@ -68,7 +74,7 @@ function FoodCard({ item }) {
   const navigate = useNavigate();
 
   const {
-    id,
+    id: foodId,
     foodName,
     foodWeight,
     foodDescription,
@@ -79,7 +85,7 @@ function FoodCard({ item }) {
   } = item;
 
   return (
-    <StyledFoodCard onClick={() => navigate(`/${foodCategory}/${id}`)}>
+    <StyledFoodCard onClick={() => navigate(`/main/${foodCategory}/${foodId}`)}>
       <ImageContainer>
         <img src={foodImage} alt="foodImage" />
       </ImageContainer>

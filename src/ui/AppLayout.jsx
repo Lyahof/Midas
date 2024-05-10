@@ -8,6 +8,7 @@ import TabletNav from "./TabletNav";
 import MobileNav from "./MobileNav";
 import { useMobBtnContent } from "../contexts/MobBtnContext";
 import MobileHeader from "./MobileHeader";
+import Breadcrumbs from "./Breadcrumbs";
 
 const Container = styled.div`
   max-width: 154rem;

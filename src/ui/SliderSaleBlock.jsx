@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import DiscountTitle from "./DiscountTitle";
 
-const Sale = styled(Link)`
+const Sale = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,8 +43,10 @@ const Text = styled.p`
 `;
 
 function SliderSaleBlock() {
+  const navigate = useNavigate();
+
   return (
-    <Sale to="/promotions">
+    <Sale onClick={() => navigate("/promotions")}>
       <DiscountTitle>30%</DiscountTitle>
       <Text>
         <Link to="/promotions">Акции</Link>

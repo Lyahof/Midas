@@ -1,5 +1,12 @@
+import Breadcrumbs from "../ui/Breadcrumbs";
+
 function Promotions() {
-  return <div>Promotions</div>;
+  return (
+    <>
+      <Breadcrumbs />
+      <div>Promotions</div>
+    </>
+  );
 }
 
 export default Promotions;

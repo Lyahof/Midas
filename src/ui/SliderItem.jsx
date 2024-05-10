@@ -40,7 +40,7 @@ function SliderItem({ item }) {
   const { title, link, foodCategory } = item;
 
   return (
-    <StyledImg link={link} to={`/${foodCategory}`}>
+    <StyledImg link={link} to={`${foodCategory}`}>
       <StyledTitle>{title}</StyledTitle>
     </StyledImg>
   );

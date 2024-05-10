@@ -142,7 +142,10 @@ function MobileNav() {
       <Input type="text" placeholder="Поиск блюда" />
       <Promotion>
         <img src="/logo-fier.svg" alt="f" />
-        <Link to="/promotions" onClick={() => setIsOpenMenu((open) => !open)}>
+        <Link
+          to="main/promotions"
+          onClick={() => setIsOpenMenu((open) => !open)}
+        >
           Акции
         </Link>
       </Promotion>
@@ -158,9 +161,9 @@ function MobileNav() {
         {hotMenuOpen && (
           <>
             <FoodNameBlock>
-              <FoodImg src="icons/fish.webp" alt="f" />
+              <FoodImg src="/icons/fish.webp" alt="f" />
               <FoodName
-                to="/hot"
+                to="main/hot"
                 onClick={() => setIsOpenMenu((open) => !open)}
               >
                 Горячие блюда
@@ -168,9 +171,9 @@ function MobileNav() {
             </FoodNameBlock>
 
             <FoodNameBlock>
-              <FoodImg src="icons/soup.webp" alt="f" />
+              <FoodImg src="/icons/soup.webp" alt="f" />
               <FoodName
-                to="/soups"
+                to="main/soups"
                 onClick={() => setIsOpenMenu((open) => !open)}
               >
                 Супы
@@ -178,9 +181,9 @@ function MobileNav() {
             </FoodNameBlock>
 
             <FoodNameBlock>
-              <FoodImg src="icons/hinkali.webp" alt="f" />
+              <FoodImg src="/icons/hinkali.webp" alt="f" />
               <FoodName
-                to="/hinkali"
+                to="main/hinkali"
                 onClick={() => setIsOpenMenu((open) => !open)}
               >
                 Хинкали
@@ -202,9 +205,9 @@ function MobileNav() {
         {coldMenuOpen && (
           <>
             <FoodNameBlock>
-              <FoodImg src="icons/cold.webp" alt="f" />
+              <FoodImg src="/icons/cold.webp" alt="f" />
               <FoodName
-                to="/cold"
+                to="main/cold"
                 onClick={() => setIsOpenMenu((open) => !open)}
               >
                 Холодные закуски
@@ -212,9 +215,9 @@ function MobileNav() {
             </FoodNameBlock>
 
             <FoodNameBlock>
-              <FoodImg src="icons/salad.webp" alt="f" />
+              <FoodImg src="/icons/salad.webp" alt="f" />
               <FoodName
-                to="/salads"
+                to="main/salads"
                 onClick={() => setIsOpenMenu((open) => !open)}
               >
                 Салаты
@@ -222,9 +225,9 @@ function MobileNav() {
             </FoodNameBlock>
 
             <FoodNameBlock>
-              <FoodImg src="icons/sauce.webp" alt="f" />
+              <FoodImg src="/icons/sauce.webp" alt="f" />
               <FoodName
-                to="/sauces"
+                to="main/sauces"
                 onClick={() => setIsOpenMenu((open) => !open)}
               >
                 Соусы
@@ -235,22 +238,31 @@ function MobileNav() {
       </FoodBlock>
       <Line />
       <FoodNameBlock>
-        <FoodImg src="icons/vipechka.webp" alt="f" />
-        <FoodName to="/bakery" onClick={() => setIsOpenMenu((open) => !open)}>
+        <FoodImg src="/icons/vipechka.webp" alt="f" />
+        <FoodName
+          to="main/bakery"
+          onClick={() => setIsOpenMenu((open) => !open)}
+        >
           Свежая выпечка
         </FoodName>
       </FoodNameBlock>
       <Line />
       <FoodNameBlock>
-        <FoodImg src="icons/desert.webp" alt="f" />
-        <FoodName to="/deserts" onClick={() => setIsOpenMenu((open) => !open)}>
+        <FoodImg src="/icons/desert.webp" alt="f" />
+        <FoodName
+          to="main/deserts"
+          onClick={() => setIsOpenMenu((open) => !open)}
+        >
           Десерты
         </FoodName>
       </FoodNameBlock>
       <Line />
       <FoodNameBlock>
-        <FoodImg src="icons/drink.webp" alt="f" />
-        <FoodName to="/drinks" onClick={() => setIsOpenMenu((open) => !open)}>
+        <FoodImg src="/icons/drink.webp" alt="f" />
+        <FoodName
+          to="main/drinks"
+          onClick={() => setIsOpenMenu((open) => !open)}
+        >
           Напитки
         </FoodName>
       </FoodNameBlock>

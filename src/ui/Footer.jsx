@@ -88,10 +88,10 @@ function Footer() {
       <Contacts>
         <Logo />
         <StyledFooterList>
-          <StyledFooterLink to="feedback">Обратная связь</StyledFooterLink>
-          <StyledFooterLink to="delivery">Доставка</StyledFooterLink>
-          <StyledFooterLink to="payment">Оплата</StyledFooterLink>
-          <StyledFooterLink to="contacts">Контакты</StyledFooterLink>
+          <StyledFooterLink to="main/feedback">Обратная связь</StyledFooterLink>
+          <StyledFooterLink to="main/delivery">Доставка</StyledFooterLink>
+          <StyledFooterLink to="main/payment">Оплата</StyledFooterLink>
+          <StyledFooterLink to="main/contacts">Контакты</StyledFooterLink>
         </StyledFooterList>
         <PhoneLink href="tel:+7(499)841-67-29">+7 (499) 841-67-29</PhoneLink>
         <EmailLink href="delivery@midas.rest">delivery@midas.rest</EmailLink>
@@ -102,10 +102,10 @@ function Footer() {
       <Copyright>
         <Name>© 2009–2024, «MIDAS», официальный сайт</Name>
         <StyledFooterList justify="flex-end">
-          <StyledFooterLink to="policy">
+          <StyledFooterLink to="main/policy">
             Политика конфиденциальности и оферта
           </StyledFooterLink>
-          <StyledFooterLink to="terms">
+          <StyledFooterLink to="main/terms">
             Пользовательское соглашение
           </StyledFooterLink>
         </StyledFooterList>

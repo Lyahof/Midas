@@ -88,11 +88,11 @@ function Icons() {
         </ToggleInput>
       )}
 
-      <StyledNavLink to="login">
+      <StyledNavLink to="main/login">
         <RiUserLine />
       </StyledNavLink>
 
-      <StyledNavLink to="cart">
+      <StyledNavLink to="main/cart">
         <GrBasket />
       </StyledNavLink>
     </StyledIcons>

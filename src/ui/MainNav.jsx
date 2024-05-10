@@ -106,7 +106,7 @@ function MainNav() {
     <nav>
       <NavList>
         <li>
-          <StyledNavLink to="/promotions">
+          <StyledNavLink to="main/promotions">
             <span>АКЦИИ</span>
             <img src="/logo-fier.svg" alt="f" />
           </StyledNavLink>
@@ -123,9 +123,9 @@ function MainNav() {
           {isOpenHot && (
             <DropDownListContainer>
               <DropDownList /* onClick={handleNavLinkClick} */>
-                <StyledNavLink to="hot">Горячие блюда</StyledNavLink>
-                <StyledNavLink to="soups">Супы</StyledNavLink>
-                <StyledNavLink to="hinkali">Хинкали</StyledNavLink>
+                <StyledNavLink to="main/hot">Горячие блюда</StyledNavLink>
+                <StyledNavLink to="main/soups">Супы</StyledNavLink>
+                <StyledNavLink to="main/hinkali">Хинкали</StyledNavLink>
               </DropDownList>
             </DropDownListContainer>
           )}
@@ -142,22 +142,22 @@ function MainNav() {
           {isOpenCold && (
             <DropDownListContainer>
               <DropDownList /* onClick={handleNavLinkClick} */>
-                <StyledNavLink to="cold">Холоднык закуски</StyledNavLink>
-                <StyledNavLink to="salads">Салаты</StyledNavLink>
-                <StyledNavLink to="sauces">Соусы</StyledNavLink>
+                <StyledNavLink to="main/cold">Холоднык закуски</StyledNavLink>
+                <StyledNavLink to="main/salads">Салаты</StyledNavLink>
+                <StyledNavLink to="main/sauces">Соусы</StyledNavLink>
               </DropDownList>
             </DropDownListContainer>
           )}
         </DropDownHeader>
 
         <li>
-          <StyledNavLink to="/bakery">ВЫПЕЧКА</StyledNavLink>
+          <StyledNavLink to="main/bakery">ВЫПЕЧКА</StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/deserts">ДЕСЕРТЫ</StyledNavLink>
+          <StyledNavLink to="main/deserts">ДЕСЕРТЫ</StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/drinks">НАПИТКИ</StyledNavLink>
+          <StyledNavLink to="main/drinks">НАПИТКИ</StyledNavLink>
         </li>
       </NavList>
     </nav>

@@ -62,24 +62,27 @@ function TabletNav() {
       <div>
         <MobNavBlock subtitle="Горячее:" paddingLeft="11rem">
           <FoodNameBlock>
-            <img src="icons/fish.webp" alt="f" />
-            <FoodName to="/hot" onClick={() => setIsOpenMenu((open) => !open)}>
+            <img src="/icons/fish.webp" alt="f" />
+            <FoodName
+              to="main/hot"
+              onClick={() => setIsOpenMenu((open) => !open)}
+            >
               Горячие блюда
             </FoodName>
           </FoodNameBlock>
           <FoodNameBlock>
-            <img src="icons/soup.webp" alt="f" />
+            <img src="/icons/soup.webp" alt="f" />
             <FoodName
-              to="/soups"
+              to="main/soups"
               onClick={() => setIsOpenMenu((open) => !open)}
             >
               Супы
             </FoodName>
           </FoodNameBlock>
           <FoodNameBlock>
-            <img src="icons/hinkali.webp" alt="f" />
+            <img src="/icons/hinkali.webp" alt="f" />
             <FoodName
-              to="/hinkali"
+              to="main/hinkali"
               onClick={() => setIsOpenMenu((open) => !open)}
             >
               Хинкали
@@ -89,24 +92,27 @@ function TabletNav() {
 
         <MobNavBlock subtitle="Холодное:" paddingLeft="11rem">
           <FoodNameBlock>
-            <img src="icons/cold.webp" alt="f" />
-            <FoodName to="/cold" onClick={() => setIsOpenMenu((open) => !open)}>
+            <img src="/icons/cold.webp" alt="f" />
+            <FoodName
+              to="main/cold"
+              onClick={() => setIsOpenMenu((open) => !open)}
+            >
               Холодные закуски
             </FoodName>
           </FoodNameBlock>
           <FoodNameBlock>
-            <img src="icons/salad.webp" alt="f" />
+            <img src="/icons/salad.webp" alt="f" />
             <FoodName
-              to="/salads"
+              to="main/salads"
               onClick={() => setIsOpenMenu((open) => !open)}
             >
               Салаты
             </FoodName>
           </FoodNameBlock>
           <FoodNameBlock>
-            <img src="icons/sauce.webp" alt="f" />
+            <img src="/icons/sauce.webp" alt="f" />
             <FoodName
-              to="/sauces"
+              to="main/sauces"
               onClick={() => setIsOpenMenu((open) => !open)}
             >
               Соусы
@@ -117,27 +123,30 @@ function TabletNav() {
 
       <MobNavBlock subtitle="Любимое:" paddingLeft="9rem">
         <FoodNameBlock>
-          <img src="icons/vipechka.webp" alt="f" />
+          <img src="/icons/vipechka.webp" alt="f" />
           <FoodName
             transform="left"
-            to="/bakery"
+            to="main/bakery"
             onClick={() => setIsOpenMenu((open) => !open)}
           >
             Свежая выпечка
           </FoodName>
         </FoodNameBlock>
         <FoodNameBlock>
-          <img src="icons/desert.webp" alt="f" />
+          <img src="/icons/desert.webp" alt="f" />
           <FoodName
-            to="/deserts"
+            to="main/deserts"
             onClick={() => setIsOpenMenu((open) => !open)}
           >
             Десерты
           </FoodName>
         </FoodNameBlock>
         <FoodNameBlock>
-          <img src="icons/drink.webp" alt="f" />
-          <FoodName to="/drinks" onClick={() => setIsOpenMenu((open) => !open)}>
+          <img src="/icons/drink.webp" alt="f" />
+          <FoodName
+            to="main/drinks"
+            onClick={() => setIsOpenMenu((open) => !open)}
+          >
             Напитки
           </FoodName>
         </FoodNameBlock>

@@ -1,5 +1,12 @@
+import Breadcrumbs from "../ui/Breadcrumbs";
+
 function Login() {
-  return <div>Login</div>;
+  return (
+    <>
+      <Breadcrumbs />
+      <div>Feedback</div>
+    </>
+  );
 }
 
 export default Login;
