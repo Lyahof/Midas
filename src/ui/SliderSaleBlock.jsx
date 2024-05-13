@@ -26,7 +26,7 @@ const Sale = styled.div`
   }
 `;
 
-const Text = styled.p`
+const Text = styled.div`
   display: flex;
   align-items: center;
   gap: 3px;
@@ -46,10 +46,10 @@ function SliderSaleBlock() {
   const navigate = useNavigate();
 
   return (
-    <Sale onClick={() => navigate("/promotions")}>
+    <Sale onClick={() => navigate("/main/promotions")}>
       <DiscountTitle>30%</DiscountTitle>
       <Text>
-        <Link to="/promotions">Акции</Link>
+        <p>Акции</p>
         <img src="/logo-fier.svg" alt="f" />
       </Text>
       <DiscountTitle>20%</DiscountTitle>

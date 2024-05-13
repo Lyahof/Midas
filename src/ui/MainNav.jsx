@@ -95,13 +95,6 @@ function MainNav() {
   const [isOpenHot, setIsOpenHot] = useState(false);
   const [isOpenCold, setIsOpenCold] = useState(false);
 
-  /*   const handleNavLinkClick = (e) => {
-    if (e.target.tagName === "A") {
-      setIsOpenHot(false);
-      setIsOpenCold(false);
-    }
-  }; */
-
   return (
     <nav>
       <NavList>
@@ -122,7 +115,7 @@ function MainNav() {
 
           {isOpenHot && (
             <DropDownListContainer>
-              <DropDownList /* onClick={handleNavLinkClick} */>
+              <DropDownList>
                 <StyledNavLink to="main/hot">Горячие блюда</StyledNavLink>
                 <StyledNavLink to="main/soups">Супы</StyledNavLink>
                 <StyledNavLink to="main/hinkali">Хинкали</StyledNavLink>

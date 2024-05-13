@@ -24,15 +24,20 @@ export async function GetMenuItems(category){
 	return menu;
 }
 
-export async function GetMenuItem(id){
+export async function GetMenuItem(id) {
 	const { data, error } = await supabase
-		.from('Menu')
+		.from("Menu")
 		.select("*")
 		.eq("id", id)
-		.single()
 
-	if(error)
-		throw new Error('Ошибка при запросе данных с сервера')
+	const { data: bestsellers, err } = await supabase
+		.from("Menu")
+		.select("*")
+		.eq("bestseller", true)
 
-	return data;
-}
+		const pageData = [...data, ...bestsellers];
+ 
+	if (error || err) throw new Error("Ошибка при запросе данных с сервера");
+ 
+	return pageData;
+ }

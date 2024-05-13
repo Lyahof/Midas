@@ -5,7 +5,8 @@ const StyledPriceBlock = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
-  margin-top: auto;
+  //margin-top: auto;
+  margin-top: ${(props) => props.marginTop || "auto"};
   padding-left: 5px;
 `;
 
@@ -24,14 +25,16 @@ const StyledBasket = styled.button`
 const Price = styled.p`
   font-size: 2.3rem;
   font-weight: 800;
+  width: 11rem; //Проверить в адаптиве
   @media (max-width: 48em) {
     font-size: 1.7rem;
+    width: 7rem; //Проверить в адаптиве
   }
 `;
 
-function PriceBlock({ children }) {
+function PriceBlock({ children, marginTop }) {
   return (
-    <StyledPriceBlock>
+    <StyledPriceBlock marginTop={marginTop}>
       <Price>{children}</Price>
       <StyledBasket>
         <GrBasket />

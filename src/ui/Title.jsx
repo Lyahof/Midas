@@ -10,7 +10,7 @@ const positions = {
 };
 
 const Title = styled.h1`
-  font-size: 8rem;
+  font-size: 7rem;
   ${(props) => positions[props.align]};
   line-height: 1;
 
