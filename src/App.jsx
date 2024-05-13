@@ -52,7 +52,7 @@ function App() {
               <Route path="main/soups" element={<Soups />} />
 
               <Route path="main/hot" element={<Hot />} />
-              <Route path="main/hot/:foodId" element={<FoodPage />} />
+              <Route path="main/hot/:productId" element={<FoodPage />} />
 
               <Route path="main/login" element={<Login />} />
               <Route path="main/cart" element={<Cart />} />

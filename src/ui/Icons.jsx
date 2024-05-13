@@ -2,11 +2,11 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useMediaQuery } from "@uidotdev/usehooks";
-import { GrBasket } from "react-icons/gr";
 import { LuPhoneOutgoing } from "react-icons/lu";
 import { PiMagnifyingGlass } from "react-icons/pi";
 import { RiUserLine } from "react-icons/ri";
 import HeaderInput from "./HeaderInput";
+import CartIcon from "../features/cart/CartIcon";
 
 const StyledIcons = styled.div`
   display: flex;
@@ -92,9 +92,7 @@ function Icons() {
         <RiUserLine />
       </StyledNavLink>
 
-      <StyledNavLink to="main/cart">
-        <GrBasket />
-      </StyledNavLink>
+      <CartIcon />
     </StyledIcons>
   );
 }

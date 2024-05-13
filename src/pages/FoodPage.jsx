@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import Breadcrumbs from "../ui/Breadcrumbs";
 import Title from "../ui/Title";
@@ -11,6 +12,7 @@ import FoodCard from "../ui/FoodCard";
 import formatCurrency from "../helpers/formatCurrency";
 import MenuBlock from "../ui/MenuBlock";
 import { GetMenuItem } from "../services/APIMenu";
+import { addItem } from "../features/cart/CartSlice";
 
 const FoodContainer = styled.div`
   display: grid;
@@ -195,17 +197,24 @@ const Bestseller = styled.div`
 `;
 
 function FoodPage() {
-  const { foodId } = useParams();
+  const { productId } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
+  const dispatch = useDispatch();
 
   const { isLoading, data } = useQuery({
     queryKey: ["menu-item"],
-    queryFn: () => GetMenuItem(foodId),
+    queryFn: () => GetMenuItem(productId),
   });
 
-  const { id, foodName, foodWeight, foodDescription, foodPrice, foodImage } =
-    data?.find((item) => Number(foodId) === item.id) || {};
+  const {
+    id: foodId,
+    foodName,
+    foodWeight,
+    foodDescription,
+    foodPrice,
+    foodImage,
+  } = data?.find((item) => Number(productId) === item.id) || {};
 
   function handlePlus() {
     setQuantity((prev) => prev + 1);
@@ -227,6 +236,20 @@ function FoodPage() {
   const bestsellers = data?.filter((bestseller, index, arr) => {
     return arr.findIndex((item) => item.id === bestseller.id) === index;
   });
+
+  function handleAddToCart() {
+    const newItem = {
+      foodId,
+      foodName,
+      foodImage,
+      foodWeight,
+      quantity,
+      foodPrice,
+      totalPrice,
+    };
+
+    dispatch(addItem(newItem));
+  }
 
   return (
     <>
@@ -254,7 +277,7 @@ function FoodPage() {
                   <Quantity>{quantity} шт</Quantity>
                   <BtnPlus onClick={handlePlus}>+</BtnPlus>
                 </QuantityBlock>
-                <PriceBlock marginTop="0">
+                <PriceBlock marginTop="0" onClick={handleAddToCart}>
                   {totalPrice
                     ? formatCurrency(totalPrice)
                     : formatCurrency(foodPrice)}

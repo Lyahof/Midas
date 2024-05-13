@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+
 import MealWeight from "./MealWeight";
 import PriceBlock from "./PriceBlock";
 import formatCurrency from "../helpers/formatCurrency";
+import { addItem } from "../features/cart/CartSlice";
 
 const StyledFoodCard = styled.div`
   display: flex;
@@ -72,6 +75,7 @@ const FoodDescription = styled.p`
 
 function FoodCard({ item }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     id: foodId,
@@ -84,6 +88,21 @@ function FoodCard({ item }) {
     oldPrice,
   } = item;
 
+  function handleAddToCart(e) {
+    e.stopPropagation();
+
+    const newItem = {
+      foodId,
+      foodName,
+      foodImage,
+      foodWeight,
+      quantity: 1,
+      foodPrice,
+      totalPrice: foodPrice * 1,
+    };
+    dispatch(addItem(newItem));
+  }
+
   return (
     <StyledFoodCard onClick={() => navigate(`/main/${foodCategory}/${foodId}`)}>
       <ImageContainer>
@@ -94,7 +113,9 @@ function FoodCard({ item }) {
         <MealWeight>{foodWeight} г</MealWeight>
         <FoodDescription>{foodDescription}</FoodDescription>
       </ContentContainer>
-      <PriceBlock>{formatCurrency(foodPrice)}</PriceBlock>
+      <PriceBlock onClick={handleAddToCart}>
+        {formatCurrency(foodPrice)}
+      </PriceBlock>
     </StyledFoodCard>
   );
 }

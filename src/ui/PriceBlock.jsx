@@ -32,11 +32,11 @@ const Price = styled.p`
   }
 `;
 
-function PriceBlock({ children, marginTop }) {
+function PriceBlock({ children, marginTop, onClick }) {
   return (
     <StyledPriceBlock marginTop={marginTop}>
       <Price>{children}</Price>
-      <StyledBasket>
+      <StyledBasket onClick={onClick}>
         <GrBasket />
       </StyledBasket>
     </StyledPriceBlock>
