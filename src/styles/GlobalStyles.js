@@ -51,7 +51,6 @@ body {
 );
   font-family: "Montserrat", sans-serif;
   color: #fff;
-
   transition: all 0.3s;
   min-height: 100vh;
   line-height: 1.2;
@@ -66,6 +65,7 @@ textarea,
 select {
   font: inherit;
   color: inherit;
+  transition: all 0.3s;
 }
 
 button {

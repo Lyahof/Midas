@@ -1,7 +1,8 @@
-import { GrBasket } from "react-icons/gr";
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { GrBasket } from "react-icons/gr";
+import { getTotalCartQuantity } from "./CartSlice";
 
 const StyledCartIcon = styled(NavLink)`
   position: relative;
@@ -35,9 +36,7 @@ const CartOverview = styled.div`
 `;
 
 function CartIcon() {
-  const totalCartQuantity = useSelector((state) =>
-    state.cart.cart.reduce((sum, item) => sum + item.quantity, 0)
-  );
+  const totalCartQuantity = useSelector(getTotalCartQuantity);
 
   return (
     <StyledCartIcon to="main/cart">

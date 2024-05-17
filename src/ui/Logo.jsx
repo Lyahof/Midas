@@ -5,7 +5,7 @@ const StyledLink = styled(Link)`
   display: block;
   width: 17rem;
   @media (max-width: 37em) {
-    width: 9rem;
+    width: 10rem;
   }
 `;
 

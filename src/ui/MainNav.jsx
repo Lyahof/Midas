@@ -135,7 +135,7 @@ function MainNav() {
           {isOpenCold && (
             <DropDownListContainer>
               <DropDownList /* onClick={handleNavLinkClick} */>
-                <StyledNavLink to="main/cold">Холоднык закуски</StyledNavLink>
+                <StyledNavLink to="main/cold">Холодные закуски</StyledNavLink>
                 <StyledNavLink to="main/salads">Салаты</StyledNavLink>
                 <StyledNavLink to="main/sauces">Соусы</StyledNavLink>
               </DropDownList>

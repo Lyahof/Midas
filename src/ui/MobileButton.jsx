@@ -7,6 +7,7 @@ import { useMobBtnContent } from "../contexts/MobBtnContext";
 const StyledMobileNav = styled.div`
   display: none;
   margin-right: ${({ isMobileDevice }) => (isMobileDevice ? "0" : "12rem")};
+  transform: translateY(-2px);
   & svg {
     width: 2.8rem;
     height: 2.8rem;
