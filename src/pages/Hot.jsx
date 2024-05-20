@@ -1,42 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
-import styled from "styled-components";
-
 import Title from "../ui/Title";
 import Spinner from "../ui/Spinner";
 import MenuBlock from "../ui/MenuBlock";
 import FoodCard from "../ui/FoodCard";
 import Breadcrumbs from "../ui/Breadcrumbs";
-import { GetMenuItems } from "../services/APIMenu";
-
-const StyledMenuContainer = styled.div`
-  padding-bottom: 12rem;
-  padding-top: 1rem;
-`;
-
-const StyledContainer = styled.div`
-  margin-bottom: 5rem;
-`;
+import FoodPageContainer from "../ui/FoodPageContainer";
+import useGetMenuItems from "../hooks/useGetMenuItems";
 
 function Hot() {
-  const { isLoading, data: menu } = useQuery({
-    queryKey: ["hot-menu"],
-    queryFn: () => GetMenuItems("hot"),
-  });
+  const { isLoading, menu } = useGetMenuItems("hot");
 
   if (isLoading) return <Spinner />;
 
   return (
-    <StyledMenuContainer>
+    <FoodPageContainer>
       <Title align="left">Горячие блюда</Title>
-      <StyledContainer>
-        <Breadcrumbs />
-      </StyledContainer>
+      <Breadcrumbs />
       <MenuBlock>
         {menu.map((item) => (
           <FoodCard item={item} key={item.id} />
         ))}
       </MenuBlock>
-    </StyledMenuContainer>
+    </FoodPageContainer>
   );
 }
 

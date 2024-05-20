@@ -12,6 +12,7 @@ import FoodCard from "../ui/FoodCard";
 import MenuBlock from "../ui/MenuBlock";
 import { GetMenuItem } from "../services/APIMenu";
 import { addItem } from "../features/cart/CartSlice";
+import Spinner from "../ui/Spinner";
 
 const FoodContainer = styled.div`
   display: grid;
@@ -206,9 +207,20 @@ function FoodPage() {
   const dispatch = useDispatch();
 
   const { isLoading, data } = useQuery({
-    queryKey: ["menu-item"],
+    queryKey: ["menu-item", productId],
     queryFn: () => GetMenuItem(productId),
   });
+
+  useEffect(() => {
+    if (data?.itemData?.foodPrice) {
+      const sum = data.itemData.foodPrice * quantity;
+      setTotalPrice(sum);
+    }
+  }, [data?.itemData?.foodPrice, quantity]);
+
+  if (isLoading) return <Spinner />;
+
+  const { itemData, bestsellerData } = data;
 
   const {
     id: foodId,
@@ -217,7 +229,7 @@ function FoodPage() {
     foodDescription,
     foodPrice,
     foodImage,
-  } = data?.find((item) => Number(productId) === item.id) || {};
+  } = itemData;
 
   function handlePlus() {
     setQuantity((prev) => prev + 1);
@@ -227,18 +239,6 @@ function FoodPage() {
     if (quantity === 1) return;
     setQuantity((prev) => prev - 1);
   }
-
-  useEffect(
-    function () {
-      const sum = foodPrice * quantity;
-      setTotalPrice(sum);
-    },
-    [foodPrice, quantity]
-  );
-
-  const bestsellers = data?.filter((bestseller, index, arr) => {
-    return arr.findIndex((item) => item.id === bestseller.id) === index;
-  });
 
   function handleAddToCart() {
     const newItem = {
@@ -300,7 +300,7 @@ function FoodPage() {
       <Bestseller>
         <HitTitle>Хиты заказов</HitTitle>
         <MenuBlock>
-          {bestsellers?.map((bestseller) => (
+          {bestsellerData?.map((bestseller) => (
             <FoodCard key={bestseller.id} item={bestseller} />
           ))}
         </MenuBlock>

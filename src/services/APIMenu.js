@@ -37,19 +37,18 @@ export async function GetMenuItems(category){
 }
 
 export async function GetMenuItem(id) {
-	const { data, error } = await supabase
+	const { data: itemData, error } = await supabase
 		.from("Menu")
 		.select("*")
 		.eq("id", id)
+		.single()
 
-	const { data: bestsellers, err } = await supabase
+	const { data: bestsellerData, err } = await supabase
 		.from("Menu")
 		.select("*")
 		.eq("bestseller", true)
-
-		const pageData = [...data, ...bestsellers];
  
 	if (error || err) throw new Error("Ошибка при запросе данных с сервера");
- 
-	return pageData;
+  
+	return {itemData, bestsellerData};
  }

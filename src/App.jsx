@@ -42,14 +42,25 @@ function App() {
               <Route index element={<Navigate to="main" />} />
               <Route path="main" element={<MainPage />} />
               <Route path="main/promotions" element={<Promotions />} />
+
               <Route path="main/bakery" element={<Bakery />} />
+              <Route path="main/bakery/:productId" element={<FoodPage />} />
+
               <Route path="main/salads" element={<Salads />} />
+              <Route path="main/salads/:productId" element={<FoodPage />} />
+
               <Route path="main/cold" element={<Cold />} />
+              <Route path="main/cold/:productId" element={<FoodPage />} />
+
               <Route path="main/deserts" element={<Deserts />} />
               <Route path="main/sauces" element={<Sauces />} />
               <Route path="main/drinks" element={<Drinks />} />
+
               <Route path="main/hinkali" element={<Hinkali />} />
+              <Route path="main/hinkali/:productId" element={<FoodPage />} />
+
               <Route path="main/soups" element={<Soups />} />
+              <Route path="main/soups/:productId" element={<FoodPage />} />
 
               <Route path="main/hot" element={<Hot />} />
               <Route path="main/hot/:productId" element={<FoodPage />} />

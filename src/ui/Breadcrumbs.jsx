@@ -25,9 +25,11 @@ const pathLabels = {
 const StyledBreadcrumbs = styled.div`
   margin-top: 1.5rem;
   font-size: 1.4rem;
+  margin-bottom: 5rem;
 
   @media (max-width: 28em) {
     font-size: 1.2rem;
+    margin-bottom: 3rem;
   }
 `;
 
