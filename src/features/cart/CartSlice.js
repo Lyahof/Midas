@@ -10,7 +10,14 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		addItem(state, action) {
-			state.cart.push(action.payload);
+			const item = state.cart.find((i)=>i.foodId === action.payload.foodId)
+			if(item){
+				item.quantity++
+				item.totalPrice = item.quantity * item.foodPrice
+			}
+			else{
+				state.cart.push(action.payload);
+			}
 		},
 		deleteItem(state, action) {
 			state.cart = state.cart.filter((item)=>item.foodId !== action.payload);
