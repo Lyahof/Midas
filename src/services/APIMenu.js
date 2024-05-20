@@ -1,5 +1,17 @@
 import supabase from "./supabase";
 
+export async function GetMainMeal(){
+	const { data, error } = await supabase
+		.from('Menu')
+		.select('*')
+		.eq("main", true)
+
+	if(error)
+		throw new Error('Ошибка при запросе данных с сервера')
+
+	return data;
+}
+
 export async function GetPopularMenu(){
 	const { data: popularMenu, error } = await supabase
 		.from('Menu')

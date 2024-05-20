@@ -1,16 +1,15 @@
 import styled from "styled-components";
-import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import PhoneLink from "../../ui/PhoneLink";
 import EmailLink from "../../ui/EmailLink";
 import PriceBlock from "../../ui/PriceBlock";
 import MealWeight from "../../ui/MealWeight";
 import MainDesert from "./MainDesert";
-
-import { GetMainMeal } from "../../services/APIMainMeal";
-import formatCurrency from "../../helpers/formatCurrency";
 import Spinner from "../../ui/Spinner";
-import { useNavigate } from "react-router-dom";
+import { addItem } from "../cart/CartSlice";
+import { useMainMenu } from "./useMainMenu";
 
 const Grid = styled.div`
   position: relative;
@@ -134,23 +133,36 @@ const Img = styled.img`
 
 function MainMeal() {
   const navigate = useNavigate();
-  const { isLoading, data } = useQuery({
-    queryKey: ["main-meal"],
-    queryFn: GetMainMeal,
-  });
+  const dispatch = useDispatch();
+  const { isLoading, data } = useMainMenu();
 
   if (isLoading) return <Spinner />;
+
   const {
-    id,
+    id: foodId,
     foodName,
     foodWeight,
     foodDescription,
     foodPrice,
+    oldPrice,
     foodImage,
     foodCategory,
-  } = data[0];
+  } = data.find((item) => item.foodCategory === "hot") || {};
 
-  const mainDesert = data[1];
+  function handleAddToCart(e) {
+    e.stopPropagation();
+
+    const newItem = {
+      foodId,
+      foodName,
+      foodImage,
+      foodWeight,
+      quantity: 1,
+      foodPrice,
+      totalPrice: foodPrice * 1,
+    };
+    dispatch(addItem(newItem));
+  }
 
   return (
     <>
@@ -165,15 +177,19 @@ function MainMeal() {
               delivery@midas.rest
             </EmailLink>
           </Links>
-          <MainDesert mainDesert={mainDesert} />
+          <MainDesert />
         </Info>
 
-        <ImageContainer onClick={() => navigate(`/${foodCategory}/${id}`)}>
+        <ImageContainer onClick={() => navigate(`/${foodCategory}/${foodId}`)}>
           <Card>
             <CardTitle>{foodName}</CardTitle>
-            <MealWeight variation="secondary">{foodWeight}</MealWeight>
+            <MealWeight variation="secondary">{foodWeight} г</MealWeight>
             <CardText>{foodDescription}</CardText>
-            <PriceBlock>{formatCurrency(foodPrice)}</PriceBlock>
+            <PriceBlock
+              foodPrice={foodPrice}
+              oldPrice={oldPrice}
+              onClick={handleAddToCart}
+            />
           </Card>
           <Img src={foodImage} />
         </ImageContainer>

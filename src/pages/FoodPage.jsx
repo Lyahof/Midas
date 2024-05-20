@@ -9,7 +9,6 @@ import styled from "styled-components";
 import MealWeight from "../ui/MealWeight";
 import PriceBlock from "../ui/PriceBlock";
 import FoodCard from "../ui/FoodCard";
-import formatCurrency from "../helpers/formatCurrency";
 import MenuBlock from "../ui/MenuBlock";
 import { GetMenuItem } from "../services/APIMenu";
 import { addItem } from "../features/cart/CartSlice";
@@ -32,12 +31,20 @@ const FoodContainer = styled.div`
   }
 `;
 
-const ImageContainer = styled.div`
-  overflow: hidden;
-`;
-
-const Img = styled.img`
+const RectangleImageContainer = styled.div`
+  position: relative;
   width: 100%;
+  padding-top: 66.66%; /* 3:2 Aspect Ratio */
+  overflow: hidden;
+
+  & img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const ProductCard = styled.div`
@@ -100,10 +107,6 @@ const BtnPlus = styled.button`
 
   &:hover {
     color: var(--yellow-color);
-
-    & div {
-      border: 1px solid var(--yellow-color);
-    }
   }
 `;
 
@@ -256,9 +259,9 @@ function FoodPage() {
       <Title align="left">{foodName}</Title>
       <Breadcrumbs foodName={foodName} />
       <FoodContainer>
-        <ImageContainer>
-          <Img src={foodImage} />
-        </ImageContainer>
+        <RectangleImageContainer>
+          <img src={foodImage} />
+        </RectangleImageContainer>
 
         <DescriptionContainer>
           <ProductCardContainer>
@@ -277,11 +280,12 @@ function FoodPage() {
                   <Quantity>{quantity} шт</Quantity>
                   <BtnPlus onClick={handlePlus}>+</BtnPlus>
                 </QuantityBlock>
-                <PriceBlock marginTop="0" onClick={handleAddToCart}>
-                  {totalPrice
-                    ? formatCurrency(totalPrice)
-                    : formatCurrency(foodPrice)}
-                </PriceBlock>
+                <PriceBlock
+                  marginTop="0"
+                  onClick={handleAddToCart}
+                  totalPrice={totalPrice}
+                  foodPrice={foodPrice}
+                />
               </RightBlock>
             </ProductCard>
           </ProductCardContainer>

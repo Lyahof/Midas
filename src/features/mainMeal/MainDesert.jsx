@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import MealWeight from "../../ui/MealWeight";
 import PriceBlock from "../../ui/PriceBlock";
-import formatCurrency from "../../helpers/formatCurrency";
-import { useNavigate } from "react-router-dom";
+import { addItem } from "../cart/CartSlice";
+import Spinner from "../../ui/Spinner";
+import { useMainMenu } from "./useMainMenu";
 
 const StyledMainDesert = styled.div`
   display: flex;
@@ -45,20 +48,52 @@ const DesertTitle = styled.p`
   }
 `;
 
-function MainDesert({ mainDesert }) {
+function MainDesert() {
   const navigate = useNavigate();
-  const { id, foodName, foodWeight, foodPrice, foodImage, foodCategory } =
-    mainDesert;
+  const dispatch = useDispatch();
+  const { isLoading, data } = useMainMenu();
+
+  if (isLoading) return <Spinner />;
+
+  const {
+    id: foodId,
+    foodName,
+    foodWeight,
+    foodDescription,
+    foodPrice,
+    oldPrice,
+    foodImage,
+    foodCategory,
+  } = data.find((item) => item.foodCategory === "deserts") || {};
+
+  function handleAddToCart(e) {
+    e.stopPropagation();
+
+    const newItem = {
+      foodId,
+      foodName,
+      foodImage,
+      foodWeight,
+      quantity: 1,
+      foodPrice,
+      totalPrice: foodPrice * 1,
+    };
+    dispatch(addItem(newItem));
+  }
 
   return (
-    <StyledMainDesert onClick={() => navigate(`/${foodCategory}/${id}`)}>
+    <StyledMainDesert onClick={() => navigate(`/${foodCategory}/${foodId}`)}>
       <ImageContainer>
         <Img src={foodImage} />
       </ImageContainer>
       <InfoContainer>
         <DesertTitle>{foodName}</DesertTitle>
         <MealWeight>{foodWeight} г</MealWeight>
-        <PriceBlock>{formatCurrency(foodPrice)}</PriceBlock>
+        <PriceBlock
+          foodPrice={foodPrice}
+          oldPrice={oldPrice}
+          onClick={handleAddToCart}
+        />
       </InfoContainer>
     </StyledMainDesert>
   );

@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import MealWeight from "./MealWeight";
 import PriceBlock from "./PriceBlock";
-import formatCurrency from "../helpers/formatCurrency";
 import { addItem } from "../features/cart/CartSlice";
 
 const StyledFoodCard = styled.div`
@@ -25,17 +24,20 @@ const StyledFoodCard = styled.div`
   }
 `;
 
-const ImageContainer = styled.div`
+const SquareImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
   overflow: hidden;
 
   & img {
-    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
     object-fit: cover;
     transition: all 0.5s;
-    &:hover {
-      transform: scale(1.05);
-    }
   }
 `;
 
@@ -105,17 +107,19 @@ function FoodCard({ item }) {
 
   return (
     <StyledFoodCard onClick={() => navigate(`/main/${foodCategory}/${foodId}`)}>
-      <ImageContainer>
+      <SquareImageContainer>
         <img src={foodImage} alt="foodImage" />
-      </ImageContainer>
+      </SquareImageContainer>
       <FoodTitle>{foodName}</FoodTitle>
       <ContentContainer>
         <MealWeight>{foodWeight} г</MealWeight>
         <FoodDescription>{foodDescription}</FoodDescription>
       </ContentContainer>
-      <PriceBlock onClick={handleAddToCart}>
-        {formatCurrency(foodPrice)}
-      </PriceBlock>
+      <PriceBlock
+        onClick={handleAddToCart}
+        foodPrice={foodPrice}
+        oldPrice={oldPrice}
+      />
     </StyledFoodCard>
   );
 }

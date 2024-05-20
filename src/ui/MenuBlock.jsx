@@ -11,12 +11,10 @@ const MenuBlock = styled.div`
 
   @media (max-width: 64em) {
     grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
   }
 
   @media (max-width: 31em) {
     grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
   }
 `;
 
