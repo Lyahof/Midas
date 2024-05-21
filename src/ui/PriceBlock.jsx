@@ -30,6 +30,9 @@ const OldPrice = styled.p`
   font-size: 1.8rem;
   font-weight: 600;
   text-decoration: line-through;
+  @media (max-width: 28em) {
+    font-size: 1.5rem;
+  }
 `;
 
 const StyledBasket = styled.button`

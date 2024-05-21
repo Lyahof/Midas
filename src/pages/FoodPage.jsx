@@ -18,7 +18,6 @@ const FoodContainer = styled.div`
   display: grid;
   grid-template-columns: 40fr 50fr;
   gap: 5rem;
-  padding-top: 3.5rem;
   margin-bottom: 8rem;
 
   @media (max-width: 64em) {
@@ -26,7 +25,6 @@ const FoodContainer = styled.div`
   }
 
   @media (max-width: 28em) {
-    padding-top: 2.5rem;
     gap: 2rem;
     margin-bottom: 5rem;
   }

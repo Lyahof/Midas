@@ -52,3 +52,15 @@ export async function GetMenuItem(id) {
   
 	return {itemData, bestsellerData};
  }
+
+ export async function GetPromotions(){
+	const { data, error } = await supabase
+		.from('Menu')
+		.select("*")
+		.gte("oldPrice", 1)
+
+	if(error)
+		throw new Error('Ошибка при запросе данных с сервера')
+
+	return data;
+}

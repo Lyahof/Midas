@@ -41,6 +41,7 @@ function App() {
             <Route element={<AppLayout />}>
               <Route index element={<Navigate to="main" />} />
               <Route path="main" element={<MainPage />} />
+
               <Route path="main/promotions" element={<Promotions />} />
 
               <Route path="main/bakery" element={<Bakery />} />
@@ -53,8 +54,13 @@ function App() {
               <Route path="main/cold/:productId" element={<FoodPage />} />
 
               <Route path="main/deserts" element={<Deserts />} />
+              <Route path="main/deserts/:productId" element={<FoodPage />} />
+
               <Route path="main/sauces" element={<Sauces />} />
+              <Route path="main/sauces/:productId" element={<FoodPage />} />
+
               <Route path="main/drinks" element={<Drinks />} />
+              <Route path="main/drinks/:productId" element={<FoodPage />} />
 
               <Route path="main/hinkali" element={<Hinkali />} />
               <Route path="main/hinkali/:productId" element={<FoodPage />} />

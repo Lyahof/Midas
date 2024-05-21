@@ -82,7 +82,9 @@ function MainDesert() {
   }
 
   return (
-    <StyledMainDesert onClick={() => navigate(`/${foodCategory}/${foodId}`)}>
+    <StyledMainDesert
+      onClick={() => navigate(`/main/${foodCategory}/${foodId}`)}
+    >
       <ImageContainer>
         <Img src={foodImage} />
       </ImageContainer>

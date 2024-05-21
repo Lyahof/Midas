@@ -180,7 +180,9 @@ function MainMeal() {
           <MainDesert />
         </Info>
 
-        <ImageContainer onClick={() => navigate(`/${foodCategory}/${foodId}`)}>
+        <ImageContainer
+          onClick={() => navigate(`/main/${foodCategory}/${foodId}`)}
+        >
           <Card>
             <CardTitle>{foodName}</CardTitle>
             <MealWeight variation="secondary">{foodWeight} г</MealWeight>

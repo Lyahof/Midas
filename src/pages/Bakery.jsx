@@ -13,7 +13,7 @@ function Bakery() {
 
   return (
     <FoodPageContainer>
-      <Title align="left">Горячие блюда</Title>
+      <Title align="left">Свежая выпечка</Title>
       <Breadcrumbs />
       <MenuBlock>
         {menu.map((item) => (

@@ -25,7 +25,11 @@ const ProductCard = styled.div`
   }
 `;
 
-const ImgBlock = styled.div`
+const SquareImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  overflow: hidden;
   width: 18rem;
   height: 18rem;
 
@@ -39,7 +43,13 @@ const ImgBlock = styled.div`
   }
 
   & img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s;
   }
 `;
 
@@ -116,9 +126,9 @@ function CartItem({ item }) {
 
   return (
     <ProductCard>
-      <ImgBlock>
+      <SquareImageContainer>
         <img src={foodImage} />
-      </ImgBlock>
+      </SquareImageContainer>
 
       <DescriptionBlock>
         <FoodTitle>{foodName}</FoodTitle>

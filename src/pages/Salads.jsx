@@ -13,7 +13,7 @@ function Salads() {
 
   return (
     <FoodPageContainer>
-      <Title align="left">Горячие блюда</Title>
+      <Title align="left">Салаты</Title>
       <Breadcrumbs />
       <MenuBlock>
         {menu.map((item) => (

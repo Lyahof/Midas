@@ -13,7 +13,7 @@ function Cold() {
 
   return (
     <FoodPageContainer>
-      <Title align="left">Горячие блюда</Title>
+      <Title align="left">Холодные блюда</Title>
       <Breadcrumbs />
       <MenuBlock>
         {menu.map((item) => (
