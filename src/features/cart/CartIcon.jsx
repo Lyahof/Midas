@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { GrBasket } from "react-icons/gr";
 import { getTotalCartQuantity } from "./CartSlice";
+import { useCartIcon } from "../../contexts/CartIconContext";
 
 const StyledCartIcon = styled(NavLink)`
   position: relative;
@@ -37,9 +38,10 @@ const CartOverview = styled.div`
 
 function CartIcon() {
   const totalCartQuantity = useSelector(getTotalCartQuantity);
+  const { cartIconRef } = useCartIcon();
 
   return (
-    <StyledCartIcon to="main/cart">
+    <StyledCartIcon to="main/cart" ref={cartIconRef}>
       {totalCartQuantity ? (
         <>
           <CartOverview>{totalCartQuantity}</CartOverview>

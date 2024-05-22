@@ -1,14 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { useMediaQuery } from "@uidotdev/usehooks";
-
 import Header from "./Header";
 import Footer from "./Footer";
 import styled from "styled-components";
 import TabletNav from "./TabletNav";
 import MobileNav from "./MobileNav";
-import { useMobBtnContent } from "../contexts/MobBtnContext";
 import MobileHeader from "./MobileHeader";
-import Breadcrumbs from "./Breadcrumbs";
+import useStyckyHeader from "../hooks/useStyckyHeader";
+import { useMobBtnContent } from "../contexts/MobBtnContext";
 
 const Container = styled.div`
   max-width: 154rem;
@@ -18,6 +17,9 @@ const Container = styled.div`
 
 const Main = styled.main`
   min-height: 100vh;
+  &.compensate-hight {
+    padding-top: 9rem;
+  }
 `;
 
 function AppLayout() {
@@ -27,12 +29,13 @@ function AppLayout() {
   );
   const isMobileDevice = useMediaQuery("only screen and (max-width : 37em)");
 
+  const { headerHeight, mobileHeaderHeight } = useStyckyHeader();
+
   return (
     <>
       <Container>
         {isMobileDevice ? <MobileHeader /> : <Header />}
-
-        <Main>
+        <Main id="main">
           {isOpenMenu && isTabletDevice && <TabletNav />}
           {isOpenMenu && isMobileDevice && <MobileNav />}
           <Outlet />

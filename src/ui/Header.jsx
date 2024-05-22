@@ -5,10 +5,29 @@ import Icons from "./Icons";
 import MobileButton from "./MobileButton";
 
 const StyledHeader = styled.header`
+  &.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+  }
+`;
+
+const HeaderContainer = styled.div`
+  max-width: 154rem;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 4rem 0 3rem 0;
+
+  &.sticky {
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+  }
 
   @media (max-width: 86em) {
     gap: 3rem;
@@ -20,11 +39,13 @@ const StyledHeader = styled.header`
 
 function Header() {
   return (
-    <StyledHeader>
-      <Logo />
-      <MainNav />
-      <MobileButton />
-      <Icons />
+    <StyledHeader id="header">
+      <HeaderContainer>
+        <Logo />
+        <MainNav />
+        <MobileButton />
+        <Icons />
+      </HeaderContainer>
     </StyledHeader>
   );
 }

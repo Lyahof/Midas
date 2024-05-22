@@ -14,7 +14,7 @@ const StyledIcons = styled.div`
   gap: 4rem;
 
   @media (max-width: 86em) {
-    gap: 3rem;
+    gap: 2rem;
   }
 `;
 
@@ -27,8 +27,6 @@ const StyledNavLink = styled(NavLink)`
 
   &:hover svg,
   &:active svg {
-    //&.active:link svg,
-    //&.active:visited svg {
     color: var(--yellow-color);
   }
 `;
@@ -45,8 +43,6 @@ const ToggleInput = styled.div`
 
   &:hover svg,
   &:active svg {
-    //&.active:link svg,
-    //&.active:visited svg {
     color: #fbd13e;
   }
 `;

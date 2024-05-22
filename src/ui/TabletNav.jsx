@@ -17,8 +17,8 @@ const StyledTabletNav = styled.div`
   gap: 4rem;
   padding: 6rem 0 0 2rem;
 
-  position: absolute;
-  top: 10rem;
+  position: fixed;
+  top: 8rem;
   left: 0;
   align-content: start;
 

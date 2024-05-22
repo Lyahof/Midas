@@ -15,7 +15,7 @@ const StyledMobileNav = styled.div`
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 
-  position: absolute;
+  position: fixed;
   top: 7rem;
   left: 0;
   z-index: 999;

@@ -20,6 +20,8 @@ const GlobalStyles = createGlobalStyle`
   --yellow-color: #fbd13e;
   --red-color: #B70000;
   --sale-black: #0F0F11;
+  --translate-x: 0px;
+  --translate-y: 0px;
 }
 
 *,
@@ -182,6 +184,26 @@ img {
 		left: 18.5rem;
 	}
 }
+
+// flyToCart
+@keyframes flyToCart {
+    from {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: translate(var(--translate-x), var(--translate-y)) scale(0.1);
+      opacity: 0.4;
+    }
+  }
+
+  .fly-img {
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+    animation: flyToCart 1.5s forwards;
+  }
+
 `
 
 export default GlobalStyles;

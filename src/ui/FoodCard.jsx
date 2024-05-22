@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -5,6 +6,7 @@ import styled from "styled-components";
 import MealWeight from "./MealWeight";
 import PriceBlock from "./PriceBlock";
 import { addItem } from "../features/cart/CartSlice";
+import { useCartIcon } from "../contexts/CartIconContext";
 
 const StyledFoodCard = styled.div`
   display: flex;
@@ -78,6 +80,8 @@ const FoodDescription = styled.p`
 function FoodCard({ item }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const imageRef = useRef(null);
+  const { cartIconRef } = useCartIcon();
 
   const {
     id: foodId,
@@ -92,6 +96,42 @@ function FoodCard({ item }) {
 
   function handleAddToCart(e) {
     e.stopPropagation();
+
+    const img = imageRef.current;
+    const imgClone = img.cloneNode(true);
+    const cartIcon = cartIconRef.current;
+
+    if (cartIcon) {
+      const cartIconRect = cartIcon.getBoundingClientRect();
+      const imgRect = img.getBoundingClientRect();
+
+      const translateX =
+        cartIconRect.left +
+        cartIconRect.width / 2 -
+        imgRect.left -
+        imgRect.width / 2;
+      const translateY =
+        cartIconRect.top +
+        cartIconRect.height / 2 -
+        imgRect.top -
+        imgRect.height / 2;
+
+      imgClone.style.position = "absolute";
+      imgClone.style.top = `${imgRect.top + window.scrollY}px`;
+      imgClone.style.left = `${imgRect.left + window.scrollX}px`;
+      imgClone.style.width = `${imgRect.width}px`;
+      imgClone.style.height = `${imgRect.height}px`;
+      imgClone.style.transition = "transform 1.2s ease-out";
+
+      imgClone.style.setProperty("--translate-x", `${translateX}px`);
+      imgClone.style.setProperty("--translate-y", `${translateY}px`);
+      imgClone.classList.add("fly-img");
+      document.body.appendChild(imgClone);
+
+      imgClone.addEventListener("animationend", () => {
+        imgClone.remove();
+      });
+    }
 
     const newItem = {
       foodId,
@@ -108,7 +148,7 @@ function FoodCard({ item }) {
   return (
     <StyledFoodCard onClick={() => navigate(`/main/${foodCategory}/${foodId}`)}>
       <SquareImageContainer>
-        <img src={foodImage} alt="foodImage" />
+        <img src={foodImage} alt="foodImage" ref={imageRef} />
       </SquareImageContainer>
       <FoodTitle>{foodName}</FoodTitle>
       <ContentContainer>
