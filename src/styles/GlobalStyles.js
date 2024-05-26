@@ -89,12 +89,13 @@ input:focus,
 button:focus,
 textarea:focus,
 select:focus {
-
+	outline: none;
 }
 
-/* Parent selector, finally 😃 */
-button:has(svg) {
-  line-height: 0;
+input::placeholder,
+textarea::placeholder {
+	color: #9ea2aa;
+	text-transform: uppercase;
 }
 
 a {
@@ -121,7 +122,6 @@ h6 {
 img {
   max-width: 100%;
 	}
-
 
 /*Slider styles */
 

@@ -37,6 +37,7 @@ const Button = styled.button`
   letter-spacing: 2px;
   ${(props) => sizes[props.size]};
   ${(props) => variations[props.variation]};
+  align-self: ${(props) => props.align};
 `;
 
 Button.defaultProps = {

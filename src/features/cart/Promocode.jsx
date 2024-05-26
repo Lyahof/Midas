@@ -4,7 +4,7 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import { applyPromocode } from "./CartSlice";
+import { setPromocode } from "./CartSlice";
 import { useDispatch } from "react-redux";
 
 const StyledPromocode = styled.div`
@@ -21,7 +21,7 @@ function Promocode({ totalCartQuantity, updatedTotalPrice }) {
   const dispatch = useDispatch();
 
   function onSubmit(data) {
-    dispatch(applyPromocode(data.promocode));
+    dispatch(setPromocode(data.enteredPromocode));
   }
 
   return (
@@ -31,9 +31,10 @@ function Promocode({ totalCartQuantity, updatedTotalPrice }) {
           <StyledPromocode>
             <FormRow label="применить промокод:" direction="column">
               <Input
+                size="small"
                 type="text"
-                id="promocode"
-                {...register("promocode")}
+                id="enteredPromocode"
+                {...register("enteredPromocode")}
                 disabled={updatedTotalPrice > 0}
               />
             </FormRow>

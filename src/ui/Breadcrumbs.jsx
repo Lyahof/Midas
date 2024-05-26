@@ -44,6 +44,10 @@ const LastCrumb = styled.span`
   opacity: 70%;
 `;
 
+const CrumbSeparator = styled.span`
+  margin: 0 1.2rem;
+`;
+
 function Breadcrumbs({ foodName }) {
   const location = useLocation();
   const paths = location.pathname.split("/").filter(Boolean);
@@ -54,7 +58,7 @@ function Breadcrumbs({ foodName }) {
     <StyledBreadcrumbs>
       {paths.map((path, index) => (
         <span key={path}>
-          {index > 0 && " / "}
+          {index > 0 && <CrumbSeparator>/</CrumbSeparator>}
 
           {index === paths.length - 1 ? (
             <LastCrumb>{foodName ? foodName : pathLabels[path]}</LastCrumb>

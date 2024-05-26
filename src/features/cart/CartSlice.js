@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
 	cart: [],
-	promocode: '',
+	enteredPromocode: '',
+	updatedTotalPrice: 0,
 }
 
 const cartSlice = createSlice({
@@ -33,20 +34,29 @@ const cartSlice = createSlice({
 			item.quantity--;
 			item.totalPrice = item.quantity * item.foodPrice;
 		},
-		applyPromocode(state, action){
-			state.promocode = action.payload;
+		applyPromocode(state, action) {
+			const totalCartPrice = state.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+			const discountAmount = (totalCartPrice * action.payload) / 100;
+			state.updatedTotalPrice = totalCartPrice - discountAmount;
+		},
+		setPromocode(state, action){
+			state.enteredPromocode = action.payload;
 		},
 		clearCart(state) {
 			state.cart = [];
+			state.updatedTotalPrice = 0;
+			state.enteredPromocode = '';
 		},
 	}
 })
 
-export const {addItem, deleteItem, increaseItemQuantity, decreaseItemQuantity, clearCart, applyPromocode} = cartSlice.actions;
+export const {addItem, deleteItem, increaseItemQuantity, decreaseItemQuantity, clearCart, applyPromocode, setPromocode} = cartSlice.actions;
 
 export const getCart = (state) => state.cart.cart;
 
-export const getPromocode = (state) => state.cart.promocode;
+export const getPromocode = (state) => state.cart.enteredPromocode;
+
+export const getUpdatedTotalPrice = (state) => state.cart.updatedTotalPrice;
 
 export const getTotalCartQuantity = (state) =>
    state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);

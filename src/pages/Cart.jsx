@@ -1,12 +1,15 @@
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Breadcrumbs from "../ui/Breadcrumbs";
 import Title from "../ui/Title";
 import {
+  applyPromocode,
   getCart,
   getPromocode,
   getTotalCartPrice,
   getTotalCartQuantity,
+  getUpdatedTotalPrice,
 } from "../features/cart/CartSlice";
 import CartItem from "../features/cart/CartItem";
 import Promocode from "../features/cart/Promocode";
@@ -14,6 +17,7 @@ import useGetPromocode from "../features/cart/useGetPromocode";
 import formatCurrency from "../helpers/formatCurrency";
 import Button from "../ui/Button";
 import EmptyCart from "../features/cart/EmptyCart";
+import { useEffect } from "react";
 
 const cardHeaderItems = ["Блюдо:", " Цена:", "Кол-во:", "Сумма:"];
 
@@ -113,23 +117,27 @@ const PromoInfo = styled.p`
 `;
 
 function Cart() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cart = useSelector(getCart);
   const totalCartQuantity = useSelector(getTotalCartQuantity);
   const totalCartPrice = useSelector(getTotalCartPrice);
-  const cart = useSelector(getCart);
-  const promoCode = useSelector(getPromocode);
+  const updatedTotalPrice = useSelector(getUpdatedTotalPrice);
+  const enteredPromocode = useSelector(getPromocode);
   const today = new Date().toISOString();
 
   const { data, isLoading } = useGetPromocode();
-  if (isLoading) return undefined;
-  const { code, expiryDate, discount } = data;
 
-  let updatedTotalPrice;
-  let discountAmount;
+  useEffect(() => {
+    if (data) {
+      const { code, expiryDate, discount } = data;
+      if (enteredPromocode === code && new Date(expiryDate) > new Date(today)) {
+        dispatch(applyPromocode(discount));
+      }
+    }
+  }, [data, enteredPromocode, dispatch, today]);
 
-  if (promoCode === code && new Date(expiryDate) > new Date(today)) {
-    discountAmount = (totalCartPrice * discount) / 100;
-    updatedTotalPrice = totalCartPrice - discountAmount;
-  }
+  if (isLoading) return null;
 
   return (
     <>
@@ -162,11 +170,11 @@ function Cart() {
               updatedTotalPrice={updatedTotalPrice}
             />
             <PromoInfo>
-              {!promoCode
+              {!enteredPromocode
                 ? ""
-                : discountAmount
+                : updatedTotalPrice
                 ? `Промокод активирован. Ваша скидка составляет ${formatCurrency(
-                    discountAmount
+                    totalCartPrice - updatedTotalPrice
                   )}`
                 : "Промокод не найден"}
             </PromoInfo>
@@ -179,7 +187,9 @@ function Cart() {
                   : formatCurrency(totalCartPrice)}
               </PriceValue>
             </PriceContainer>
-            <Button>Оформить заказ</Button>
+            <Button onClick={() => navigate("/main/cart/placingOrder")}>
+              Оформить заказ
+            </Button>
           </PriceBlock>
         </>
       ) : (
