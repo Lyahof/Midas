@@ -10,17 +10,21 @@ const FormFlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 45rem;
+  max-width: 65rem;
+  //max-width: 45rem;
+  //width: 70%;
 `;
 
 const InputsBlock = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 2rem;
 `;
 
-function PersonalDataForm() {
+function PersonalDataForm({ register, required, errors }) {
   const isMobileDevice = useMediaQuery("only screen and (max-width : 31em)");
+
   return (
     <DataFormContainer>
       <Title align="left" size="extraSmall">
@@ -28,24 +32,46 @@ function PersonalDataForm() {
       </Title>
       <FormFlexContainer>
         <Registration />
+
         <InputsBlock>
-          <FormRow label="имя *">
-            <Input type="text" placeholder={isMobileDevice ? "имя *" : null} />
-          </FormRow>
-          <FormRow label="телефон *">
+          <FormRow label="имя *" error={errors?.name?.message}>
             <Input
               type="text"
-              placeholder={isMobileDevice ? "телефон *" : null}
+              placeholder={isMobileDevice ? "имя *" : null}
+              id="name"
+              {...register("name", {
+                required: "Поле обязательно ",
+              })}
             />
           </FormRow>
-          <FormRow label="Email">
-            <Input type="text" placeholder={isMobileDevice ? "Email" : null} />
+
+          <FormRow label="телефон *" error={errors?.phoneNumber?.message}>
+            <Input
+              type="tel"
+              placeholder={isMobileDevice ? "телефон *" : null}
+              id="phoneNumber"
+              {...register("phoneNumber", {
+                required: "Поле обязательно",
+              })}
+            />
           </FormRow>
+
+          <FormRow label="Email">
+            <Input
+              type="email"
+              placeholder={isMobileDevice ? "Email" : null}
+              id="email"
+              {...register("email")}
+            />
+          </FormRow>
+
           <FormRow label="кол-во персон">
             <Input
               type="text"
               size="small"
               placeholder={isMobileDevice ? "кол-во персон" : null}
+              id="peopleQuantity"
+              {...register("peopleQuantity")}
             />
           </FormRow>
         </InputsBlock>

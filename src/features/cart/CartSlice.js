@@ -56,13 +56,14 @@ export const getCart = (state) => state.cart.cart;
 
 export const getPromocode = (state) => state.cart.enteredPromocode;
 
-export const getUpdatedTotalPrice = (state) => state.cart.updatedTotalPrice;
 
 export const getTotalCartQuantity = (state) =>
-   state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
+state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
 
 export const getTotalCartPrice = (state) =>
-   state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+
+export const getUpdatedTotalPrice = (state) => state.cart.updatedTotalPrice;
 
 export const getCurrentQuantityById = (id) => (state) =>
 	(state.cart.cart.find(item => item.foodId === id)?.quantity) || 0;

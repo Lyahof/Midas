@@ -78,8 +78,7 @@ const PriceValue = styled.p`
 `;
 
 function OrderItemsBlock({ order, updatedTotalPrice, totalCartPrice }) {
-  const { isActiveCard } = useActivateDelivery();
-  const deliveryPrice = isActiveCard === 0 ? 300 : 0;
+  const { deliveryPrice } = useActivateDelivery();
   const { isShowOrder } = useHiddenOrderContext();
 
   return (
@@ -88,6 +87,15 @@ function OrderItemsBlock({ order, updatedTotalPrice, totalCartPrice }) {
         <OrderItem item={item} key={id} />
       ))}
       <PriceBlock>
+        {updatedTotalPrice ? (
+          <PriceContainer>
+            <PriceTitle>Скидка по промокоду:</PriceTitle>
+            <PriceValue>
+              {formatCurrency(totalCartPrice - updatedTotalPrice)}
+            </PriceValue>
+          </PriceContainer>
+        ) : null}
+
         <PriceContainer>
           <PriceTitle>Стоимость заказа:</PriceTitle>
           <PriceValue>

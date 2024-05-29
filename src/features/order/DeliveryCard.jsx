@@ -43,13 +43,13 @@ const Text = styled.p`
 `;
 
 function DeliveryCard({ card, isActiveCard, onClick }) {
-  const { title, price, text } = card;
+  const { title, deliveryPrice, text } = card;
 
   return (
     <StyledDeliveryCard onClick={onClick} isActiveCard={isActiveCard}>
       <Title>
         <p>{title}</p>
-        <h5>{formatCurrency(price)}</h5>
+        <h5>{formatCurrency(deliveryPrice)}</h5>
       </Title>
       <Text>{text}</Text>
     </StyledDeliveryCard>

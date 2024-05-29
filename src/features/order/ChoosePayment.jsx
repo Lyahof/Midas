@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 import Title from "../../ui/Title";
 import DataFormContainer from "./DataFormContainer";
 import PaymentItem from "./PaymentItem";
@@ -7,14 +6,17 @@ import Button from "../../ui/Button";
 
 const paymentMethods = [
   {
+    value: "cards",
     text: "Банковские карты / Электронные деньги / Другое",
     showIcons: true,
   },
   {
+    value: "cash",
     text: "Наличными курьеру",
     showIcons: false,
   },
   {
+    value: "cardCourier",
     text: "Картой курьеру",
     showIcons: false,
   },
@@ -28,9 +30,7 @@ const PaymentBlockContainer = styled.div`
   width: 90%;
 `;
 
-function ChoosePayment() {
-  const [isActivePaymentCard, setIsActivePaymentCard] = useState(0);
-
+function ChoosePayment({ register, selectedPaymentMethod, setValue }) {
   return (
     <DataFormContainer>
       <Title align="left" size="extraSmall">
@@ -41,8 +41,11 @@ function ChoosePayment() {
           <PaymentItem
             key={index}
             method={method}
-            onClick={() => setIsActivePaymentCard(index)}
-            isActivePaymentCard={isActivePaymentCard === index}
+            onClick={() => {
+              setValue("paymentMethod", method.value);
+            }}
+            isActivePaymentCard={selectedPaymentMethod === method.value}
+            register={register}
           />
         ))}
       </PaymentBlockContainer>

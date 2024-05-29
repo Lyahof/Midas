@@ -11,12 +11,12 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 const deliveryData = [
   {
     title: "Доставка по городу",
-    price: "300",
+    deliveryPrice: "300",
     text: "Доставка по Москве в пределах МКАД Осуществляется: ежедневно с 12:00 до 00:00, Диапозон времени: от 1 до 1.5 часовДоступен с 12:00 до 00:00 По адресу ул. Улофа Пальме 5с2",
   },
   {
     title: "Самовывоз",
-    price: "0",
+    deliveryPrice: "0",
     text: "Доступен с 12:00 до 00:00 По адресу ул. Улофа Пальме 5с2",
   },
 ];
@@ -35,10 +35,11 @@ const DeliveryCardBox = styled.div`
 const InputsBlock = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 2rem;
 `;
 
-function DeliveryDataForm() {
+function DeliveryDataForm({ register, required, errors }) {
   const { isActiveCard, setIsActiveCard } = useActivateDelivery();
   const isMobileDevice = useMediaQuery("only screen and (max-width : 31em)");
 
@@ -61,17 +62,25 @@ function DeliveryDataForm() {
 
       {isActiveCard === 0 && (
         <InputsBlock>
-          <FormRow label="улица *">
+          <FormRow label="улица *" error={errors?.street?.message}>
             <Input
               type="text"
               placeholder={isMobileDevice ? "улица *" : null}
+              id="street"
+              {...register("street", {
+                required: "Поле обязательно",
+              })}
             />
           </FormRow>
-          <FormRow label="дом *">
+          <FormRow label="дом *" error={errors?.house?.message}>
             <Input
               type="text"
               size="small"
               placeholder={isMobileDevice ? "дом *" : null}
+              id="house"
+              {...register("house", {
+                required: "Поле обязательно",
+              })}
             />
           </FormRow>
           <FormRow label="квартира">
@@ -79,6 +88,8 @@ function DeliveryDataForm() {
               type="text"
               size="small"
               placeholder={isMobileDevice ? "квартира" : null}
+              id="apartmentNum"
+              {...register("apartmentNum")}
             />
           </FormRow>
           <FormRow label="комментарий">
@@ -86,6 +97,8 @@ function DeliveryDataForm() {
               rows="5"
               cols="40"
               placeholder={isMobileDevice ? "комментарий" : null}
+              id="comment"
+              {...register("comment")}
             />
           </FormRow>
         </InputsBlock>

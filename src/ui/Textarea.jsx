@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Textarea = styled.textarea`
+  max-width: 32rem;
   text-transform: uppercase;
   border: none;
   outline: none;

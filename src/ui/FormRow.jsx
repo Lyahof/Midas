@@ -4,7 +4,6 @@ import styled, { css } from "styled-components";
 const directions = {
   row: css`
     flex-direction: row;
-    gap: 2rem;
     align-items: center;
   `,
   column: css`
@@ -22,27 +21,36 @@ const StyledFormRow = styled.div`
 const Label = styled.label`
   justify-self: start;
   color: #9ea2aa;
-  @media (max-width: 48em) {
-    font-size: 1rem;
-  }
+  margin-right: 2rem;
+  min-width: 14rem;
+`;
+
+const ErrorPlaceholder = styled.div`
+  min-width: 15rem; /* Зарезервировать место */
+  margin-left: 2rem;
 `;
 
 const Error = styled.span`
   font-size: 1.3rem;
-  color: #b70000;
+  color: var(--yellow-color);
 `;
 
 function FormRow({ label, error, children, direction }) {
   const isMobileDevice = useMediaQuery("only screen and (max-width : 31em)");
+  const isTabletDevice = useMediaQuery("only screen and (max-width : 48em)");
 
   return (
-    <StyledFormRow direction={direction}>
-      {label && !isMobileDevice && (
-        <Label /* htmlFor={children.props.id} */>{label}</Label>
-      )}
-      {children}
-      {error && <Error>{error}</Error>}
-    </StyledFormRow>
+    <>
+      <StyledFormRow direction={direction}>
+        {label && !isMobileDevice && (
+          <Label htmlFor={children.props.id}>{label}</Label>
+        )}
+        {children}
+        {!isTabletDevice && (
+          <ErrorPlaceholder>{error && <Error>{error}</Error>}</ErrorPlaceholder>
+        )}
+      </StyledFormRow>
+    </>
   );
 }
 

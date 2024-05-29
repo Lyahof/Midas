@@ -6,7 +6,7 @@ const CheckboxContainer = styled.div`
   position: relative;
 `;
 
-const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
+const HiddenCheckbox = styled.input.attrs({ type: "radio" })`
   border: 0;
   clip: rect(0 0 0 0);
   clippath: inset(50%);
