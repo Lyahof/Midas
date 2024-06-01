@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 import MainPage from "./pages/MainPage";
 import Bakery from "./pages/Bakery";
 import Cart from "./pages/Cart";
@@ -15,7 +16,7 @@ import Soups from "./pages/Soups";
 import PageNotFound from "./pages/PageNotFound";
 import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./ui/AppLayout";
-import Login from "./pages/Login";
+import Account from "./pages/Account";
 import Feedback from "./pages/Feedback";
 import Delivery from "./pages/Delivery";
 import Payment from "./pages/Payment";
@@ -30,6 +31,7 @@ import { MobBtnProvider } from "./contexts/MobBtnContext";
 import { CartIconProvider } from "./contexts/CartIconContext";
 import { ActivateDeliveryContextProvider } from "./contexts/ActivateDeliveryContext";
 import { HiddenOrderContextProvider } from "./contexts/HiddenOrderContext";
+import { OpenCloseModalProvider } from "./contexts/OpenCloseModalContext";
 
 const queryClient = new QueryClient();
 
@@ -37,89 +39,117 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <CartIconProvider>
-        <GlobalStyles />
-        <MobBtnProvider>
-          <ActivateDeliveryContextProvider>
-            <HiddenOrderContextProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route element={<AppLayout />}>
-                    <Route index element={<Navigate to="main" />} />
-                    <Route path="main" element={<MainPage />} />
+      <OpenCloseModalProvider>
+        <CartIconProvider>
+          <GlobalStyles />
+          <MobBtnProvider>
+            <ActivateDeliveryContextProvider>
+              <HiddenOrderContextProvider>
+                <BrowserRouter>
+                  <Routes>
+                    <Route element={<AppLayout />}>
+                      <Route index element={<Navigate to="main" />} />
+                      <Route path="main" element={<MainPage />} />
 
-                    <Route path="main/promotions" element={<Promotions />} />
+                      <Route path="main/promotions" element={<Promotions />} />
 
-                    <Route path="main/bakery" element={<Bakery />} />
-                    <Route
-                      path="main/bakery/:productId"
-                      element={<FoodPage />}
-                    />
+                      <Route path="main/bakery" element={<Bakery />} />
+                      <Route
+                        path="main/bakery/:productId"
+                        element={<FoodPage />}
+                      />
 
-                    <Route path="main/salads" element={<Salads />} />
-                    <Route
-                      path="main/salads/:productId"
-                      element={<FoodPage />}
-                    />
+                      <Route path="main/salads" element={<Salads />} />
+                      <Route
+                        path="main/salads/:productId"
+                        element={<FoodPage />}
+                      />
 
-                    <Route path="main/cold" element={<Cold />} />
-                    <Route path="main/cold/:productId" element={<FoodPage />} />
+                      <Route path="main/cold" element={<Cold />} />
+                      <Route
+                        path="main/cold/:productId"
+                        element={<FoodPage />}
+                      />
 
-                    <Route path="main/deserts" element={<Deserts />} />
-                    <Route
-                      path="main/deserts/:productId"
-                      element={<FoodPage />}
-                    />
+                      <Route path="main/deserts" element={<Deserts />} />
+                      <Route
+                        path="main/deserts/:productId"
+                        element={<FoodPage />}
+                      />
 
-                    <Route path="main/sauces" element={<Sauces />} />
-                    <Route
-                      path="main/sauces/:productId"
-                      element={<FoodPage />}
-                    />
+                      <Route path="main/sauces" element={<Sauces />} />
+                      <Route
+                        path="main/sauces/:productId"
+                        element={<FoodPage />}
+                      />
 
-                    <Route path="main/drinks" element={<Drinks />} />
-                    <Route
-                      path="main/drinks/:productId"
-                      element={<FoodPage />}
-                    />
+                      <Route path="main/drinks" element={<Drinks />} />
+                      <Route
+                        path="main/drinks/:productId"
+                        element={<FoodPage />}
+                      />
 
-                    <Route path="main/hinkali" element={<Hinkali />} />
-                    <Route
-                      path="main/hinkali/:productId"
-                      element={<FoodPage />}
-                    />
+                      <Route path="main/hinkali" element={<Hinkali />} />
+                      <Route
+                        path="main/hinkali/:productId"
+                        element={<FoodPage />}
+                      />
 
-                    <Route path="main/soups" element={<Soups />} />
-                    <Route
-                      path="main/soups/:productId"
-                      element={<FoodPage />}
-                    />
+                      <Route path="main/soups" element={<Soups />} />
+                      <Route
+                        path="main/soups/:productId"
+                        element={<FoodPage />}
+                      />
 
-                    <Route path="main/hot" element={<Hot />} />
-                    <Route path="main/hot/:productId" element={<FoodPage />} />
+                      <Route path="main/hot" element={<Hot />} />
+                      <Route
+                        path="main/hot/:productId"
+                        element={<FoodPage />}
+                      />
 
-                    <Route path="main/login" element={<Login />} />
-                    <Route path="main/cart" element={<Cart />} />
+                      <Route path="main/account" element={<Account />} />
 
-                    <Route
-                      path="main/cart/placingOrder"
-                      element={<PlacingOrder />}
-                    />
+                      <Route path="main/cart" element={<Cart />} />
 
-                    <Route path="main/feedback" element={<Feedback />} />
-                    <Route path="main/delivery" element={<Delivery />} />
-                    <Route path="main/payment" element={<Payment />} />
-                    <Route path="main/contacts" element={<Contacts />} />
-                    <Route path="main/policy" element={<Policy />} />
-                    <Route path="main/terms" element={<Terms />} />
-                  </Route>
-                  <Route path="*" element={<PageNotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </HiddenOrderContextProvider>
-          </ActivateDeliveryContextProvider>
-        </MobBtnProvider>
-      </CartIconProvider>
+                      <Route
+                        path="main/cart/placingOrder"
+                        element={<PlacingOrder />}
+                      />
+
+                      <Route path="main/feedback" element={<Feedback />} />
+                      <Route path="main/delivery" element={<Delivery />} />
+                      <Route path="main/payment" element={<Payment />} />
+                      <Route path="main/contacts" element={<Contacts />} />
+                      <Route path="main/policy" element={<Policy />} />
+                      <Route path="main/terms" element={<Terms />} />
+                    </Route>
+                    <Route path="*" element={<PageNotFound />} />
+                  </Routes>
+                </BrowserRouter>
+              </HiddenOrderContextProvider>
+            </ActivateDeliveryContextProvider>
+          </MobBtnProvider>
+        </CartIconProvider>
+      </OpenCloseModalProvider>
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
+        toastOptions={{
+          success: {
+            duration: 8000,
+          },
+          error: {
+            duration: 7000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "var(--yellow-color)",
+          },
+        }}
+      />
     </QueryClientProvider>
   );
 }

@@ -22,7 +22,7 @@ const InputsBlock = styled.div`
   gap: 2rem;
 `;
 
-function PersonalDataForm({ register, required, errors }) {
+function PersonalDataForm({ register, errors }) {
   const isMobileDevice = useMediaQuery("only screen and (max-width : 31em)");
 
   return (
@@ -34,6 +34,16 @@ function PersonalDataForm({ register, required, errors }) {
         <Registration />
 
         <InputsBlock>
+          <FormRow label="Email">
+            <Input
+              type="email"
+              disabled
+              placeholder={isMobileDevice ? "Email" : null}
+              id="email"
+              {...register("email")}
+            />
+          </FormRow>
+
           <FormRow label="имя *" error={errors?.name?.message}>
             <Input
               type="text"
@@ -53,15 +63,6 @@ function PersonalDataForm({ register, required, errors }) {
               {...register("phoneNumber", {
                 required: "Поле обязательно",
               })}
-            />
-          </FormRow>
-
-          <FormRow label="Email">
-            <Input
-              type="email"
-              placeholder={isMobileDevice ? "Email" : null}
-              id="email"
-              {...register("email")}
             />
           </FormRow>
 

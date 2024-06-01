@@ -16,12 +16,16 @@ import ChoosePayment from "../features/order/ChoosePayment";
 import HiddenOrder from "../features/order/HiddenOrder";
 import { useForm } from "react-hook-form";
 import { useActivateDelivery } from "../contexts/ActivateDeliveryContext";
+import { useUserProfileData } from "../features/authentication/useUserProfileData";
+import Button from "../ui/Button";
+import { useOpenCloseModalContext } from "../contexts/OpenCloseModalContext";
 
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 3fr 2fr;
   gap: 2rem;
   position: relative;
+  margin-bottom: 5rem;
 
   @media (max-width: 64em) {
     grid-template-columns: 1fr;
@@ -35,21 +39,22 @@ function PlacingOrder() {
     watch,
     setValue,
     required,
-    reset,
-    formState,
+    formState: { errors },
   } = useForm({
     defaultValues: {
       paymentMethod: "cards",
     },
   });
-  const { errors } = formState;
+
+  const { setIsOpenModal } = useOpenCloseModalContext();
+  const { user, userProfile, isLoading } = useUserProfileData(setValue);
   const order = useSelector(getCart);
   const updatedTotalPrice = useSelector(getUpdatedTotalPrice) || 0;
   const totalCartPrice = useSelector(getTotalCartPrice);
   const promocode = useSelector(getPromocode);
+  const { deliveryPrice } = useActivateDelivery();
   const discount =
     updatedTotalPrice > 0 ? totalCartPrice - updatedTotalPrice : 0;
-  const { deliveryPrice } = useActivateDelivery();
   const finalPrice =
     updatedTotalPrice > 0
       ? updatedTotalPrice + deliveryPrice
@@ -71,8 +76,6 @@ function PlacingOrder() {
     console.log(orderItem);
   }
 
-  function onError(errors) {}
-
   return (
     <>
       <Title align="left" size="small">
@@ -83,7 +86,7 @@ function PlacingOrder() {
       <HiddenOrder />
 
       <GridContainer>
-        <Form onSubmit={handleSubmit(onSubmit, onError)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <PersonalDataForm
             register={register}
             required={required}
@@ -101,6 +104,13 @@ function PlacingOrder() {
             selectedPaymentMethod={selectedPaymentMethod}
             setValue={setValue}
           />
+          {user ? (
+            <Button align="flex-start">Подтвердить заказ</Button>
+          ) : (
+            <Button align="flex-start" onClick={() => setIsOpenModal(true)}>
+              Подтвердить заказ
+            </Button>
+          )}
         </Form>
 
         {order && totalCartPrice > 0 && (

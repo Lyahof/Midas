@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useOpenCloseModalContext } from "../../contexts/OpenCloseModalContext";
+import { useUser } from "../authentication/useUser";
 
 const StyledRegistration = styled.div`
   display: flex;
@@ -25,11 +27,20 @@ const RegistrationText = styled.p`
 `;
 
 function Registration() {
+  const { user } = useUser();
+  const { setIsOpenModal } = useOpenCloseModalContext();
+
   return (
     <StyledRegistration>
-      <StyledRegistrationLink to="/main/login">
-        Уже покупали у нас?
-      </StyledRegistrationLink>
+      {!user ? (
+        <StyledRegistrationLink onClick={() => setIsOpenModal(true)}>
+          Уже покупали у нас?
+        </StyledRegistrationLink>
+      ) : (
+        <StyledRegistrationLink to="/main/account">
+          Уже покупали у нас?
+        </StyledRegistrationLink>
+      )}
       <RegistrationText>
         Войдите в личный кабинет, и все ваши данный автоматически заполнятся
       </RegistrationText>

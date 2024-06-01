@@ -7,6 +7,10 @@ import { PiMagnifyingGlass } from "react-icons/pi";
 import { RiUserLine } from "react-icons/ri";
 import HeaderInput from "./HeaderInput";
 import CartIcon from "../features/cart/CartIcon";
+import Modal from "./Modal";
+import Login from "../features/authentication/Login";
+import { useUser } from "../features/authentication/useUser";
+import { useOpenCloseModalContext } from "../contexts/OpenCloseModalContext";
 
 const StyledIcons = styled.div`
   display: flex;
@@ -64,6 +68,8 @@ const PiMagnifyingGlassCont = styled.div`
 
 function Icons() {
   const [isInput, setIsInput] = useState(false);
+  const { isOpenModal, setIsOpenModal } = useOpenCloseModalContext();
+  const { isAuthenticated } = useUser();
   const isMobileDevice = useMediaQuery("only screen and (max-width : 37em)");
 
   return (
@@ -84,10 +90,23 @@ function Icons() {
         </ToggleInput>
       )}
 
-      <StyledNavLink to="main/login">
-        <RiUserLine />
-      </StyledNavLink>
+      {isAuthenticated ? (
+        <StyledNavLink to="/main/account">
+          <RiUserLine />
+        </StyledNavLink>
+      ) : (
+        <StyledNavLink
+          onClick={() => setIsOpenModal((isOpenModal) => !isOpenModal)}
+        >
+          <RiUserLine />
+        </StyledNavLink>
+      )}
 
+      {isOpenModal && (
+        <Modal onClose={() => setIsOpenModal(false)}>
+          <Login />
+        </Modal>
+      )}
       <CartIcon />
     </StyledIcons>
   );

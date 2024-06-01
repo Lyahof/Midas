@@ -49,7 +49,7 @@ function ChoosePayment({ register, selectedPaymentMethod, setValue }) {
           />
         ))}
       </PaymentBlockContainer>
-      <Button align="flex-start">Подтвердить заказ</Button>
+      {/* <Button align="flex-start">Подтвердить заказ</Button> */}
     </DataFormContainer>
   );
 }

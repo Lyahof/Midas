@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import Button from "../../ui/Button";
@@ -5,7 +6,6 @@ import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import { setPromocode } from "./CartSlice";
-import { useDispatch } from "react-redux";
 
 const StyledPromocode = styled.div`
   display: flex;

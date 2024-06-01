@@ -6,7 +6,7 @@ const DataFormContainer = styled.div`
   gap: 5rem;
   align-items: center;
   position: relative;
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
   & h1 {
     &::after {
       content: "";

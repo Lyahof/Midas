@@ -12,7 +12,7 @@ const pathLabels = {
   drinks: "Напитки",
   bakery: "Свежая выпечка",
   salads: "Салаты",
-  login: "Вход в личный кабинет",
+  account: "Аккаунт",
   cart: "Корзина",
   placingOrder: "Оформление заказа",
   feedback: "Обратная связь",
