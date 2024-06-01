@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import styled from "styled-components";
@@ -10,8 +9,6 @@ import Title from "../ui/Title";
 import Button from "../ui/Button";
 import AdressInput from "../ui/AdressInput";
 import useUpdateUserData from "../features/authentication/useUpdateUserData";
-import { useUser } from "../features/authentication/useUser";
-import { useUserProfile } from "../features/authentication/useUserProfile";
 import { useUserProfileData } from "../features/authentication/useUserProfileData";
 
 const StyledAccount = styled.div`
@@ -47,25 +44,6 @@ function Account() {
   const { updateData, isPending } = useUpdateUserData();
 
   const { user, userProfile, isLoading } = useUserProfileData(setValue);
-
-  /*  const { user } = useUser();
-  const userId = user?.id;
-
-  const { userProfile, isLoading } = useUserProfile(userId);
-
-  useEffect(() => {
-    if (user) {
-      setValue("userId", user.id || "");
-      setValue("email", user.email || "");
-      setValue("name", userProfile?.name || "");
-      setValue("phoneNumber", userProfile?.phoneNumber || "");
-      setValue("street", userProfile?.street || "");
-      setValue("house", userProfile?.house || "");
-      setValue("apartmentNum", userProfile?.apartmentNum || "");
-      setValue("entranceNum", userProfile?.entranceNum || "");
-      setValue("floor", userProfile?.floor || "");
-    }
-  }, [user, setValue, userProfile]); */
 
   function onSubmit(data) {
     updateData(data);

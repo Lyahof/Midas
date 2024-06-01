@@ -19,7 +19,7 @@ const ButtonTextContainer = styled.div`
 function Login() {
   const [email, setEmail] = useState("");
   const { isOpenModal, setIsOpenModal } = useOpenCloseModalContext();
-  const { mutate, isPending, isSuccess } = useLogin(); //Записывает нового
+  const { mutate, isPending, isSuccess } = useLogin();
 
   useEffect(
     function () {
