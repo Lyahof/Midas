@@ -76,6 +76,12 @@ function PlacingOrder() {
     console.log(orderItem);
   }
 
+  /*  const handleCheckout = () => {
+	if (user) {
+	  dispatch(clearCart(user.id));
+	}
+ }; */
+
   return (
     <>
       <Title align="left" size="small">

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -10,6 +11,7 @@ import {
   getTotalCartPrice,
   getTotalCartQuantity,
   getUpdatedTotalPrice,
+  saveCart,
 } from "../features/cart/CartSlice";
 import CartItem from "../features/cart/CartItem";
 import Promocode from "../features/cart/Promocode";
@@ -17,7 +19,7 @@ import useGetPromocode from "../features/cart/useGetPromocode";
 import formatCurrency from "../helpers/formatCurrency";
 import Button from "../ui/Button";
 import EmptyCart from "../features/cart/EmptyCart";
-import { useEffect } from "react";
+import { useUser } from "../features/authentication/useUser";
 
 const cardHeaderItems = ["Блюдо:", " Цена:", "Кол-во:", "Сумма:"];
 
@@ -120,13 +122,20 @@ function Cart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector(getCart);
+  const { user } = useUser();
+
   const totalCartQuantity = useSelector(getTotalCartQuantity);
   const totalCartPrice = useSelector(getTotalCartPrice);
   const updatedTotalPrice = useSelector(getUpdatedTotalPrice);
   const enteredPromocode = useSelector(getPromocode);
   const today = new Date().toISOString();
-
   const { data, isLoading } = useGetPromocode();
+
+  useEffect(() => {
+    if (user && cart.length > 0) {
+      dispatch(saveCart({ userId: user.id, cart }));
+    }
+  }, [cart, user, dispatch]);
 
   useEffect(() => {
     if (data) {

@@ -5,7 +5,8 @@ export async function login(email){
 	const { data, error } = await supabase.auth.signInWithOtp({
 			email,
 			options: {
-				emailRedirectTo: 'https://midas-one.vercel.app/main',
+				emailRedirectTo: 'https://midas-one.vercel.app/',
+				//emailRedirectTo:  'http://localhost:5173/main',
 			}, 
 		})
 

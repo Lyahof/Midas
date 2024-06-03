@@ -32,10 +32,13 @@ import { CartIconProvider } from "./contexts/CartIconContext";
 import { ActivateDeliveryContextProvider } from "./contexts/ActivateDeliveryContext";
 import { HiddenOrderContextProvider } from "./contexts/HiddenOrderContext";
 import { OpenCloseModalProvider } from "./contexts/OpenCloseModalContext";
+import useLoadCart from "./hooks/useLoadCart";
 
 const queryClient = new QueryClient();
 
 function App() {
+  useLoadCart();
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
