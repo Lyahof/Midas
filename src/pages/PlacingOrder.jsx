@@ -1,7 +1,9 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Breadcrumbs from "../ui/Breadcrumbs";
 import Title from "../ui/Title";
 import {
+  clearCart,
+  clearSavedCart,
   getCart,
   getPromocode,
   getTotalCartPrice,
@@ -19,6 +21,9 @@ import { useActivateDelivery } from "../contexts/ActivateDeliveryContext";
 import { useUserProfileData } from "../features/authentication/useUserProfileData";
 import Button from "../ui/Button";
 import { useOpenCloseModalContext } from "../contexts/OpenCloseModalContext";
+import useCreateOrder from "../features/order/useCreateOrder";
+import { useNavigate } from "react-router-dom";
+import SpinnerMini from "../ui/SpinnerMini";
 
 const GridContainer = styled.div`
   display: grid;
@@ -32,10 +37,18 @@ const GridContainer = styled.div`
   }
 `;
 
+const ButtonTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+`;
+
 function PlacingOrder() {
   const {
     handleSubmit,
     register,
+    reset,
     watch,
     setValue,
     required,
@@ -45,6 +58,9 @@ function PlacingOrder() {
       paymentMethod: "cards",
     },
   });
+  const { createOrder, isPending } = useCreateOrder();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { setIsOpenModal } = useOpenCloseModalContext();
   const { user, userProfile, isLoading } = useUserProfileData(setValue);
@@ -63,7 +79,10 @@ function PlacingOrder() {
   const selectedPaymentMethod = watch("paymentMethod");
 
   function onSubmit(data) {
-    const orderItem = {
+    if (!user) setIsOpenModal(true);
+    if (!data) return;
+
+    const newOrder = {
       ...data,
       deliveryPrice,
       order,
@@ -72,15 +91,17 @@ function PlacingOrder() {
       promocode,
       discount,
       finalPrice,
+      orderStatus: "Выполняется",
     };
-    console.log(orderItem);
+    createOrder(newOrder, {
+      onSuccess: () => {
+        reset();
+        dispatch(clearCart());
+        dispatch(clearSavedCart(user.id));
+        navigate("/main/account");
+      },
+    });
   }
-
-  /*  const handleCheckout = () => {
-	if (user) {
-	  dispatch(clearCart(user.id));
-	}
- }; */
 
   return (
     <>
@@ -110,13 +131,15 @@ function PlacingOrder() {
             selectedPaymentMethod={selectedPaymentMethod}
             setValue={setValue}
           />
-          {user ? (
-            <Button align="flex-start">Подтвердить заказ</Button>
-          ) : (
-            <Button align="flex-start" onClick={() => setIsOpenModal(true)}>
-              Подтвердить заказ
-            </Button>
-          )}
+          <Button align="flex-start" disabled={isPending}>
+            {isPending ? (
+              <ButtonTextContainer>
+                <span>Подтвердить заказ</span> <SpinnerMini />
+              </ButtonTextContainer>
+            ) : (
+              "Подтвердить заказ"
+            )}
+          </Button>
         </Form>
 
         {order && totalCartPrice > 0 && (

@@ -8,7 +8,10 @@ const directions = {
   `,
   column: css`
     flex-direction: column;
-    gap: 1rem;
+    //gap: 1rem;
+    &:not(:first-child) {
+      gap: 1rem;
+    }
   `,
 };
 
