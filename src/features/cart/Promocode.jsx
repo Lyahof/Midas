@@ -29,7 +29,7 @@ function Promocode({ totalCartQuantity, updatedTotalPrice }) {
       {totalCartQuantity > 0 && (
         <Form onSubmit={handleSubmit(onSubmit)}>
           <StyledPromocode>
-            <FormRow label="применить промокод:" direction="column">
+            <FormRow label="ввести промокод:" direction="column">
               <Input
                 size="small"
                 type="text"

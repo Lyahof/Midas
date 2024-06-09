@@ -45,7 +45,7 @@ function FormRow({ label, error, children, direction }) {
   return (
     <>
       <StyledFormRow direction={direction}>
-        {label && !isMobileDevice && (
+        {label /* && !isMobileDevice */ && (
           <Label htmlFor={children.props.id}>{label}</Label>
         )}
         {children}

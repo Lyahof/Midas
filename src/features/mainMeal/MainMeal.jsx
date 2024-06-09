@@ -193,7 +193,7 @@ function MainMeal() {
               onClick={handleAddToCart}
             />
           </Card>
-          <Img src={foodImage} />
+          <Img src={foodImage} alt="Main-food image" fetchPriority="high" />
         </ImageContainer>
       </Grid>
     </>

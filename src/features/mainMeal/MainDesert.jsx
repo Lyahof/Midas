@@ -59,7 +59,6 @@ function MainDesert() {
     id: foodId,
     foodName,
     foodWeight,
-    foodDescription,
     foodPrice,
     oldPrice,
     foodImage,
@@ -86,7 +85,7 @@ function MainDesert() {
       onClick={() => navigate(`/main/${foodCategory}/${foodId}`)}
     >
       <ImageContainer>
-        <Img src={foodImage} />
+        <Img src={foodImage} alt="Main-desert image" fetchPriority="high" />
       </ImageContainer>
       <InfoContainer>
         <DesertTitle>{foodName}</DesertTitle>
