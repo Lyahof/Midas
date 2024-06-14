@@ -31,6 +31,7 @@ function Promocode({ totalCartQuantity, updatedTotalPrice }) {
           <StyledPromocode>
             <FormRow label="ввести промокод:" direction="column">
               <Input
+                placeholder="промокод..."
                 size="small"
                 type="text"
                 id="enteredPromocode"

@@ -26,6 +26,38 @@ const Grid = styled.div`
   @media (max-width: 64em) {
     grid-template-columns: 1fr;
   }
+
+  @media (max-width: 28em) {
+    &::after {
+      content: "";
+      position: absolute;
+      background-image: url("/background-images/plate-1.webp");
+      top: 3rem;
+      right: -7rem;
+      width: 12rem;
+      height: 12rem;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transform: rotate(45deg);
+      z-index: -1;
+      opacity: 80%;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      background-image: url("/background-images/plate-2.webp");
+      top: 7rem;
+      left: -8rem;
+      width: 10rem;
+      height: 10rem;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transform: rotate(45deg);
+      z-index: -1;
+      opacity: 80%;
+    }
+  }
 `;
 
 const Info = styled.div`
